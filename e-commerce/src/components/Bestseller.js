@@ -39,7 +39,7 @@ const Bestseller = () => {
     "./img/logo6.png",
   ];
   return (
-    <div className="bg-[#FAFAFA] py-12 font-['montserrat']">
+    <div className="bg-[#FAFAFA] py-12 font-['montserrat'] ">
       <div className="flex flex-col items-center">
         <div className="w-[80%] text-left">
           <h3 className="font-bold  mb-6 text-[#252B42] text-2xl">
@@ -49,7 +49,7 @@ const Bestseller = () => {
         <hr className="m-auto" />
         <div className="gap-12 flex flex-row">
           {BestsellerList.map((item, index) => (
-            <div key={index} className="p-2 text-center">
+            <div key={index} className="p-2 text-center shadow-lg">
               <img src={item.image} className="m-auto py-2"></img>
               <h5 className="pb-3 text-center font-bold text-base text-[#252B42]">
                 {item.header}

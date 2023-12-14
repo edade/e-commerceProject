@@ -13,7 +13,7 @@ const Footer = () => {
       the quick fox jumps over the lazy dog
     </p>
   </div>
-  <button className="text-white bg-[#23A6F0] py-4 px-10 bg-primary rounded">
+  <button className="text-white bg-[#23A6F0] py-4 px-10 rounded">
     Contact Us
   </button>
 </div>
