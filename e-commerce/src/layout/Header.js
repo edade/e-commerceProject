@@ -3,10 +3,10 @@ import { NavLink, Link } from "react-router-dom";
 const Header = () => {
   return (
     <header>
-      <div className="flex justify-between mt-4 items-center h-[5.688rem] font-['montserrat']">
+      <div className="flex justify-between mt-2 items-center h-[4rem] font-['montserrat']">
         <Link
           to="/"
-          className="flex ml-[8.5rem] w-44 h-14 items-center font-extrabold"
+          className="flex ml-[8.5rem] w-44 h-14 items-center font-bold"
         >
           Bandage
         </Link>
