@@ -64,7 +64,7 @@ const Bestseller = () => {
                 <h5 className="text-[#BDBDBD] font-bold">
                   {item.price}
                   <span className="text-[#23856D] font-bold ">
-                    {item.price2}
+                     {item.price2} 
                   </span>
                 </h5>
               </div>
