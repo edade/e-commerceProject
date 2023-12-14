@@ -43,7 +43,7 @@ const Producstcard2 = () => {
                   </a>
                   <h5 className="text-[#BDBDBD] font-bold">
                     $16.48
-                    <span className="text-[#23856D] font-bold ">$6.48</span>
+                    <span className="text-[#23856D] font-bold "> $6.48</span>
                   </h5>
                 </div>
               ))}
