@@ -1,7 +1,7 @@
 const Shopcard = () => {
     return ( 
         
-      <div className="bg-[#FAFAFA] text-[#252B42] font-['montserrat']flex-row ml-[10rem] flex mx-auto w-full">
+      <div className="bg-[#FAFAFA] text-[#252B42] font-['montserrat']flex-row  flex mx-auto justify-around">
         <div className="flex gap-10 py-20 justify-center items-center text-left">
           <div>
             <div className="relative">
