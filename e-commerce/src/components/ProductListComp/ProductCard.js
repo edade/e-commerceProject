@@ -30,15 +30,25 @@ const ProductCard = () => {
             <h5 className="text-[#BDBDBD] font-bold">
               $16.48 <span className="text-[#23856D] font-bold ">$6.48</span>
             </h5>
+            <div className="flex text-center justify-center py-2">
+              <button class="w-4 h-4 bg-[#23A6F0] rounded-full mr-2"></button>
+              <button class="w-4 h-4 bg-[#23856D] rounded-full mr-2"></button>
+              <button class="w-4 h-4 bg-[#E77C40] rounded-full mr-2"></button>
+              <button class="w-4 h-4 bg-[#23856D] rounded-full mr-2"></button>{" "}
+            </div>
           </div>
         ))}
       </div>
-      <div className="text-xs" >
-        <button className="border rounded-l-lg h-14 w-20 text-[#737373] bg-[#BDBDBD] ">First</button>
+      <div className="text-xs">
+        <button className="border rounded-l-lg h-14 w-20 text-[#737373] bg-[#BDBDBD] ">
+          First
+        </button>
         <button className="border h-14 w-10 text-[#23A6F0]">1</button>
         <button className="border h-14 w-10 text-white bg-[#23A6F0] ">2</button>
         <button className="border  h-14 w-10 text-[#23A6F0]"> 3</button>
-        <button className="border rounded-r-lg h-14 w-20 text-[#23A6F0]">Next</button>
+        <button className="border rounded-r-lg h-14 w-20 text-[#23A6F0]">
+          Next
+        </button>
       </div>
     </div>
   );
