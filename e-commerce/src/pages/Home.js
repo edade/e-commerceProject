@@ -1,4 +1,5 @@
 import Bestseller from "../components/Bestseller";
+import Brand from "../components/Brand";
 import ImageCarousel from "../components/CarouselImg";
 import FeaturedPosts from "../components/FeaturedPosts";
 import Mostpopular from "../components/Mostpopular";
@@ -20,6 +21,7 @@ const Home =() => {
             <Producstcard2/>
             <Mostpopular2/>
             <Bestseller/>
+            <Brand/>
             <FeaturedPosts/>
             <Footer/>
         </div>
