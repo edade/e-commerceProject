@@ -7,10 +7,10 @@ const CategoryCard = () => {
     "./img/shopcard5.png",
   ];
   return (
-    <div className="flex flex-wrap justify-center items-center gap-10 py-10 font-['montserrat']">
+    <div className="flex flex-wrap justify-center items-center gap-10 py-10 font-['montserrat'] ">
       {ShopCardList.map((image, index) => (
         <div key={index} className="w-48">
-          <div className="relative">
+          <div className="relative shadow-xl hover:text-[#737373]">
             <img src={image} alt="" className="w-full h-auto" />
             <div className="absolute top-20 left-10 text-white">
               <h6 className="text-2xl font-bold">CLOTHS</h6>
