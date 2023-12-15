@@ -1,6 +1,6 @@
 const ProductListFilter = () => {
   return (
-    <div className=" w-full font-['montserrat'] ">
+    <div className=" w-full font-['montserrat'] my-4 ">
       <div className="flex justify-around container mx-auto p-4 h-12 items-center text-[#737373]">
         <div className="flex items-center font-bold text-sm ">
           <p>Showing all 112 results</p>
