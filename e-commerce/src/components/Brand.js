@@ -8,7 +8,7 @@ const Brand =()=> {
         "./img/logo6.png",
       ];
     return (
-        <div className="flex flex-wrap justify-center items-center gap-9 py-24 ">
+        <div className="flex flex-wrap justify-center items-center gap-9 my-12 py-16 bg-[#FAFAFA] ">
           {logoList.map((image, index) => (
             <div key={index} className="w-40">
               <img src={image} alt="" className="w-full h-auto" />
