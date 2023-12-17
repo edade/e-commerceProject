@@ -1,5 +1,4 @@
 import Brand from "../components/Brand";
-import ProductListHeader from "../components/ProductListComp/ProductListHeader";
 import ShopContainer from "../components/ProductListComp/ShopContainer";
 import Footer from "../layout/Footer";
 import Header from "../layout/Header";
@@ -10,7 +9,7 @@ import ProductCard from "../components/ProductListComp/ProductCard";
 const ProductListPage = () => {
     return (
         <div>
-            <ProductListHeader/>
+        
             <Header/>
             <ShopContainer/>
             <CategoryCard/>

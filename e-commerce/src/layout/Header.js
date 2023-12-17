@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 const Header = () => {
-  const location = useLocation;
+  const location = useLocation();
   const isProductListPage = location.pathname === "/products";
 
   return (
