@@ -67,7 +67,7 @@ const ProductDescription = () => {
             </p>
           </div>
           <div className="flex flex-col gap-3">
-            <h3 className="text-[#252B42] font-bold text-lg">
+            <h3 className="text-[#252B42] font-bold text-xl">
               the quick fox jumps over
             </h3>
             <p>
