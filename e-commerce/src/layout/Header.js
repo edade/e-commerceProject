@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 const Header = () => {
   const location = useLocation();
-  const isProductListPage = location.pathname === "/products";
+  const isHomePage = location.pathname === "/products";
 
   return (
     <header>
-      {isProductListPage && (
+      {isHomePage ? null : (
         <div className=" bg-[#23856D] w-full font-['montserrat'] ">
           <div className="flex justify-evenly container mx-auto p-4 h-12 items-center text-white">
             <div className="flex items-center font-normal text-sm ">

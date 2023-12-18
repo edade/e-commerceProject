@@ -1,4 +1,4 @@
-const ProductCard = () => {
+const ProductListCard = () => {
   const ProductData = [
     { image: "./img/productcard/img1.png" },
     { image: "./img/productcard/img2.png" },
@@ -54,4 +54,4 @@ const ProductCard = () => {
   );
 };
 
-export default ProductCard;
+export default ProductListCard;

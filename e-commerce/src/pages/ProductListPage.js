@@ -4,7 +4,7 @@ import Footer from "../layout/Footer";
 import Header from "../layout/Header";
 import CategoryCard from "../components/ProductListComp/CategoryCard";
 import ProductListFilter from "../components/ProductListComp/ProductListFilter";
-import ProductCard from "../components/ProductListComp/ProductCard";
+import ProductListCard from "../components/ProductListComp/ProductListCard";
 
 const ProductListPage = () => {
     return (
@@ -14,7 +14,7 @@ const ProductListPage = () => {
             <ShopContainer/>
             <CategoryCard/>
             <ProductListFilter/>
-            <ProductCard/>
+            <ProductListCard/>
             <Brand/>
             <Footer/>
         </div>
