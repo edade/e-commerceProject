@@ -43,7 +43,7 @@ const ProductDescription = () => {
             </h3>
             <p>
               <span>
-                <i class="fa-light fa-greater-than"></i>
+                 <i class="fa-light fa-greater-than"></i>
               </span>
               the quick fox jumps over the lazy dog
             </p>
