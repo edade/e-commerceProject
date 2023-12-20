@@ -1,4 +1,4 @@
-import Brand from "../components/Brand";
+import Brand from "../components/Home/Brand";
 import ShopContainer from "../components/ProductListComp/ShopContainer";
 import BestSellerProductCard from "../components/ProductPageComp/BestSellerProductCard";
 import ProductCard from "../components/ProductPageComp/ProductCard";

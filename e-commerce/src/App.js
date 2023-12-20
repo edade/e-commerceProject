@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import ProductListPage from "./pages/ProductListPage";
 import ProductPage from "./pages/ProductPage";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route exact path="/pages">
           <ProductPage/>
+        </Route>
+        <Route exact path="/about">
+          <AboutPage/>
         </Route>
       </Switch>
     </div>

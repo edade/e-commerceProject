@@ -3,13 +3,14 @@ import { useState } from "react";
 
 const ProductCard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(0);
   const images = [
     "./img/ProductPage/image10.png",
     "./img/ProductPage/image11.png",
   ];
-  const ImageHandler = (e) => {
-    setImage(e.target.src);
+  const ImageHandler = (index) => {
+    setActiveIndex(index);
+    setImage(images[index]);
   };
   return (
     <div className="bg-[#FAFAFA] py-3">
@@ -31,6 +32,7 @@ const ProductCard = () => {
                   />
                 ))}
               </div>
+              
             )}
           >
             {images.map((image, index) => (
@@ -38,9 +40,12 @@ const ProductCard = () => {
                 <img
                   src={image}
                   alt={`image ${index + 1}`}
+                  onClick={ImageHandler}
                   className={`w-full h-auto object-contain ${
                     activeIndex === index ? "filter-none" : "filter-grayscale"
+                    
                   }`}
+                
                 />
               </div>
             ))}
