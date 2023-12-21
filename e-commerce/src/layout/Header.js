@@ -2,12 +2,14 @@ import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 const Header = () => {
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
-  const isAbout = location.pathname === "/about";
+
+  const isProductPage = location.pathname === "/pages";
+  const isProductListPage = location.pathname === "/products";
+
 
   return (
     <header>
-      {isHomePage || isAbout ? null : (
+      {isProductPage || isProductListPage ? (
         <div className=" bg-[#23856D] w-full font-['montserrat'] ">
           <div className="flex justify-evenly container mx-auto p-4 h-12 items-center text-white">
             <div className="flex items-center font-normal text-sm ">
@@ -38,7 +40,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      )}
+      ) : null }
       <div className="flex justify-between mt-2 items-center h-[4rem] font-['montserrat']">
         <Link
           to="/"
