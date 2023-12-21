@@ -9,31 +9,33 @@ const Producstcard2 = () => {
   ];
   return (
     <div>
-      <div className="container m-auto ml-[10rem]  max-w-screen-lg">
-        <div className="flex flex-row pt-12">
-          <div className="flex flex-col ml-8 items-start">
-            <div className="flex flex-row">
-              <h3 className="text-2xl font-bold text-text-color mr-4">
+      <div className="container flex sm:flex-col-reverse m-auto lg:ml-[10rem]  lg:max-w-screen-lg">
+        <div className="flex lg:flex-row sm:flex-col-reverse  pt-12">
+          <div className="flex flex-col ml-8 lg:items-center sm:items-center">
+            <div className="flex lg:flex-row sm:flex-col ">
+              <h3 className="text-2xl font-bold text-[#252B42] mr-4 lg:pt-0 sm:pt-12">
                 BESTSELLER PRODUCTS
               </h3>
-              <button className="py-[10px] px-5 text-[#23A6F0] text-sm font-bold mr-4 items-start text-start ">
-                Men
-              </button>
-              <button className="py-[10px] px-5 text-[#737373] text-sm font-bold mr-4 ">
-                Women
-              </button>
-              <button className="py-[10px] px-5 text-[#737373] text-sm font-bold ">
-                Accessories
-              </button>
+              <div className="flex sm:flex-row">
+                <button className="py-[10px] px-5 text-[#23A6F0] text-sm font-bold mr-4 items-start text-start ">
+                  Men
+                </button>
+                <button className="py-[10px] px-5 text-[#737373] text-sm font-bold mr-4 ">
+                  Women
+                </button>
+                <button className="py-[10px] px-5 text-[#737373] text-sm font-bold ">
+                  Accessories
+                </button>
+              </div>
             </div>
-            <div className="flex flex-wrap  gap-x-9 mt-6 ">
+            <div className="flex lg:flex-wrap lg:flex-row sm:flex-col sm:w-full lg:gap-x-9 mt-6 ">
               {data.map((item, index) => (
                 <div
                   key={index}
-                  className="flex flex-col text-center w-[11rem] mb-8"
+                  className="flex flex-col text-center lg:w-[11rem] mb-8 sm:w-full"
                 >
                   <img
-                    className="w-[11rem] h-[10rem]"
+                    className="lg:w-[11rem] lg:h-[10rem] sm:w-full sm:h-full"
                     src={item.image}
                     alt=""
                   />
@@ -51,7 +53,7 @@ const Producstcard2 = () => {
           </div>
           <div className="relative">
             <img
-              src="./img/card-cover-5.jpg"
+              src="./img/product-2.jpg"
               className="flex h-[35rem] w-[32rem]"
             ></img>
             <div className="absolute top-0 left-0 p-6 gap-[5px]">

@@ -17,7 +17,7 @@ const FeaturedPosts = () => {
             Featured Posts
           </h3>
         </div>
-        <div className=" flex items center justify-center ">
+        <div className=" flex lg:flex-row sm:flex-col lg:items center lg:justify-center sm:items-center sm:justify-center ">
           {featuredData.map((image, index) => (
             <div key={index} className="relative shadow-md w-[320px] mx-2 ">
               <img

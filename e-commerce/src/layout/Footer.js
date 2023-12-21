@@ -3,8 +3,8 @@ import React from "react";
 const Footer = () => {
   return (
 
-<div className="w-full flex flex-col items-center justify-around gap-y-16 bg-[#252B42] font-['montserrat']">
-<div className="items-start w-[80%]  flex flex-col h-60 py-0  text-white lg:flex-row lg:w-[95%] lg:h-[8.875rem] lg:py-10 lg:justify-between">
+<div className="lg:w-full sm:min-w-min flex flex-col lg:items-center sm:items-center sm:justify-center justify-around gap-y-16 bg-[#252B42] font-['montserrat']">
+<div className="lg:items-start  sm:w-[80%] sm:items-center sm:justify-center  flex flex-col h-60 py-0  text-white lg:flex-row lg:w-[95%] lg:h-[8.875rem] lg:py-10 lg:justify-between">
   <div className="flex flex-col text-left">
     <h3 className="font-bold text-2xl leading-8 tracking-wide">
       Consulting Agency For Your Business
@@ -18,7 +18,7 @@ const Footer = () => {
   </button>
 </div>
 <div className="w-full row-centered  text-white">
-  <div className="w-[90%] ml-9 flex flex-col justify-between gap-y-8 lg:flex-row text-left">
+  <div className="lg:w-[90%] sm:w-[90%] lg:ml-9 sm:ml-14 flex flex-col justify-between gap-y-8 lg:flex-row text-left">
     <div className="footer-div">
       <p className=" mb-4 font-[600]">Company Info</p>
       <div className="flex flex-col gap-y-2.5">

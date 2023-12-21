@@ -33,17 +33,17 @@ const Bestseller = () => {
 
   return (
     <div className="bg-[#FAFAFA] py-12 font-['montserrat'] ">
-      <div className="flex flex-col items-center">
-        <div className="w-[80%] text-left">
+      <div className="flex flex-col lg:items-center sm:items-center">
+        <div className="lg:w-[80%] sm:w-full lg:text-left">
           <h3 className="font-bold  mb-6 text-[#252B42] text-2xl">
             BESTSELLER PRODUCTS
           </h3>
         </div>
         <hr className="m-auto" />
-        <div className="gap-12 flex flex-row">
+        <div className="gap-12 flex lg:flex-row sm:flex-col">
           {BestsellerList.map((item, index) => (
             <div key={index} className="p-2 text-center shadow-lg">
-              <img src={item.image} className="m-auto py-2"></img>
+              <img src={item.image} className="m-auto lg:py-2 sm:p-4"></img>
               <h5 className="pb-3 text-center font-bold text-base text-[#252B42]">
                 {item.header}
               </h5>

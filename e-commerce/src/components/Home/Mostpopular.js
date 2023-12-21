@@ -2,8 +2,8 @@ import { NavLink, Link } from "react-router-dom";
 const Mostpopular = () => {
   return (
     <div className="flex-col font-['montserrat']">
-      <div className="flex flex-row container justify-center items-center py-4 gap-1 ]">
-        <div className="flex ">
+      <div className="flex lg:flex-row sm:flex-col container justify-center items-center py-4 gap-1 ]">
+        <div className="flex lg:flex-row sm:flex-col  ">
           <div>
             <img className="ml-[3rem] w-[80%]" src="./img/mostpopular.png"></img>
           </div>
@@ -28,7 +28,7 @@ const Mostpopular = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row items-center ml-[10rem] text-left ">
+      <div className="flex sm:flex-col lg:flex-row sm:items-center lg:items-center lg:ml-[10rem] text-left ">
           <div className="flex gap-4 p-4">
             <div className="text-[#E74040] font-bold text-[40px] me-2">1.</div>
             <div className="flex flex-col gap-[5px]">
@@ -59,8 +59,8 @@ const Mostpopular = () => {
           <div className="flex gap-4 p-4">
             <div className="text-[#E74040] font-bold text-[40px] me-2">4.</div>
             <div className="flex flex-col gap-[5px]">
-              <p className="font-bold text-sm text-[#252B42] mr-[10rem] ">Easy to use</p>
-              <p className="font-medium text-xs text-[#737373]  mr-[9rem]">
+              <p className="font-bold text-sm text-[#252B42] lg:mr-[10rem] ">Easy to use</p>
+              <p className="font-medium text-xs text-[#737373]  lg:mr-[9rem]">
                 Things on a very small that you have any direct
               </p>
             </div>

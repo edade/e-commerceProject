@@ -3,7 +3,7 @@ const Mostpopular2 = () => {
   return (
     <div className="flex-col font-['montserrat']">
       <div className="flex flex-row container justify-center items-center py-4 gap-1 ]">
-        <div className="flex ">
+        <div className="flex lg:flex-row sm:flex-col  sm:items-center sm:justify-center  ">
           <div className="flex flex-col w-[40%] items-center justify-center py-20 gap-[19px] text-center bg-[#FAFAFA]">
             <h5 className="text-[#252B42] font-bold text-2xl">MOST POPULAR</h5>
             <p className="font-semibold text-sm w-[15rem] text-[#737373] ">
@@ -32,7 +32,7 @@ const Mostpopular2 = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row items-center ml-[10rem] text-left ">
+      <div className="flex sm:flex-col lg:flex-row sm:items-center  lg:items-center lg:ml-[10rem] text-left ">
         <div className="flex gap-4 p-4">
           <div className="text-[#E74040] font-bold text-[40px] me-2">1.</div>
           <div className="flex flex-col gap-[5px]">
@@ -63,10 +63,10 @@ const Mostpopular2 = () => {
         <div className="flex gap-4 p-4">
           <div className="text-[#E74040] font-bold text-[40px] me-2">4.</div>
           <div className="flex flex-col gap-[5px]">
-            <p className="font-bold text-sm text-[#252B42] mr-[10rem] ">
+            <p className="font-bold text-sm text-[#252B42] lg:mr-[10rem] ">
               Easy to use
             </p>
-            <p className="font-medium text-xs text-[#737373]  mr-[9rem]">
+            <p className="font-medium text-xs text-[#737373]  lg:mr-[9rem]">
               Things on a very small that you have any direct
             </p>
           </div>

@@ -31,12 +31,12 @@ export default function Carousel({ slides }) {
           <img className="h-[1em] " src="./img/left.png" alt="" />
         </button>
         <div className="flex flex-col items-center text-center">
-          <h1 className=" text-[40px] text-white text-center font-bold">GROCERIES DELIVERY</h1>
-          <p className="w-[20rem] m-auto font-normal text-center text-white text-xl py-4">
+          <h1 className=" lg:text-3xl sm:text-lg  text-white text-center font-bold">GROCERIES DELIVERY</h1>
+          <p className="w-[20rem] m-auto font-normal text-center text-white sm:text-base lg:text-xl py-4">
             We know how large objects will act, but things on a small scale just
             do not act that way.
           </p>
-          <button className="text-white bg-[#23A6F0] w-[175px] text-center py-2 rounded"> Start Now</button>
+          <button className="text-white bg-[#23A6F0] lg:w-[175px] sm:w-44 sm:text-sm text-center py-2 rounded"> Start Now</button>
         </div>
         <button onClick={nextSlide}>
           <img className="h-[1em] " src="./img/right.png" alt="" />

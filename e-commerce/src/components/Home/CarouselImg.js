@@ -9,7 +9,7 @@ export default function ImageCarousel() {
       ];
     
       return (
-        <div className="w-full m-auto">
+        <div className="w-full m-auto lg:pt-0 sm:pt-52 ">
           <Carousel slides={slides} />
         </div>
       );
