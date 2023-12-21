@@ -4,7 +4,7 @@ const Mostpopular2 = () => {
     <div className="flex-col font-['montserrat']">
       <div className="flex flex-row container justify-center items-center py-4 gap-1 ]">
         <div className="flex lg:flex-row sm:flex-col  sm:items-center sm:justify-center  ">
-          <div className="flex flex-col w-[40%] items-center justify-center py-20 gap-[19px] text-center bg-[#FAFAFA]">
+          <div className="flex flex-col w-[40%] lg:items-center lg:justify-center sm:items-center sm:justify-center py-20 gap-[19px] text-center bg-[#FAFAFA]">
             <h5 className="text-[#252B42] font-bold text-2xl">MOST POPULAR</h5>
             <p className="font-semibold text-sm w-[15rem] text-[#737373] ">
               We focus on ergonomics and meeting you where you work. It's only a

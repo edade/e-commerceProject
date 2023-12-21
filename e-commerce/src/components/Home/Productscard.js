@@ -40,7 +40,7 @@ const Producstcard = () => {
                 </button>
               </div>
             </div>
-            <div className="flex lg:flex-wrap lg:flex-row sm:flex-col sm:w-full lg:gap-x-9 mt-6 ">
+            <div className="flex lg:flex-wrap lg:flex-row sm:flex-col sm:w-[80%] lg:gap-x-9 mt-6 ">
               {data.map((item, index) => (
                 <div
                   key={index}
