@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header>
       {isProductPage || isProductListPage ? (
-        <div className=" bg-[#23856D] w-full font-['montserrat'] ">
+        <div className=" bg-[#23856D] w-full font-['montserrat'] hidden md:block ">
           <div className="flex justify-evenly container mx-auto p-4 h-12 items-center text-white">
             <div className="flex items-center font-normal text-sm ">
               <img
@@ -41,15 +41,15 @@ const Header = () => {
           </div>
         </div>
       ) : null }
-      <div className="flex lg:flex-row sm:flex-col sm: justify-between mt-2 items-center h-[4rem] font-['montserrat']">
+      <div className="flex lg:flex-row sm:flex-col sm: justify-between mt-2 items-center font-['montserrat']">
         <Link
           to="/"
           className="flex lg:ml-[8.5rem] lg:w-44 lg:h-14 sm:h-4 items-center font-bold"
         >
           Bandage
         </Link>
-        <div className="flex lg:flex-row sm:flex-col  lg:w-[68.25rem] lg:mr-[8.5rem] lg:justify-around h-14 items-center">
-          <nav className="flex lg:flex-row sm:flex-col sm:py-6 sm:justify-center lg:w-[22.5rem] lg:justify-between font-semibold text-[#737373]">
+        <div className="flex lg:flex-row sm:flex-col  lg:w-[68.25rem] lg:mr-[8.5rem] lg:justify-around h-26 items-center">
+          <nav className="flex lg:flex-row sm:flex-col sm:py-6 sm:justify-center lg:w-[22.5rem] lg:justify-between sm:py-4 font-semibold text-[#737373]">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/products">Shop</NavLink>
             <NavLink to="/about">About</NavLink>
@@ -57,8 +57,8 @@ const Header = () => {
             <NavLink to="/contact">Contact</NavLink>
             <NavLink to="/pages">Pages</NavLink>
           </nav>
-          <div className="flex">
-            <div className="flex items-center w-[12.5rem] justify-around px-4 font-semibold text-[#23A6F0]">
+          <div className="flex lg:flex-row sm:flex-col">
+            <div className="flex items-center w-[12.5rem] justify-around px-4 font-semibold sm:pb-4 text-[#23A6F0]">
               <img className="h-[1em] " src="./img/login.png" alt="" />
 
               <NavLink to="/login">Login /</NavLink>
@@ -66,14 +66,14 @@ const Header = () => {
               <NavLink to="/register">Register</NavLink>
             </div>
             <div className="flex lg:flex-row sm:flex-col lg:w-[9.875rem] lg:justify-between px-3 items-center text-[#23A6F0]">
-              <div className="flex items-center">
+              <div className="flex items-center ">
                 <img
                   className="h-[1em] items-center"
                   src="./img/search.png"
                   alt=""
                 />
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center sm:py-4">
                 <img
                   className="h-[1em] items-center"
                   src="./img/shop.png"

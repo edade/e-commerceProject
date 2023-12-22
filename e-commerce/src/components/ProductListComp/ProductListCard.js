@@ -20,9 +20,9 @@ const ProductListCard = () => {
         {ProductData.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col  text-center w-[15rem] mb-8 shadow-lg hover:shadow-slate-800 "
+            className="flex flex-col  text-center lg:w-[15rem] sm:w-full sm:mx-8 mb-8 shadow-lg hover:shadow-slate-800 "
           >
-            <img className="w-[15rem] h-[15rem]" src={item.image} alt="" />
+            <img className="lg:w-[15rem] lg:h-[15rem] sm:w-full sm:h-full" src={item.image} alt="" />
             <h5 className="text-[#252B42]  font-bold">Graphic Design</h5>
             <a className="text-[#737373] text-sm font-bold py-2" href="#">
               English Department
@@ -39,7 +39,7 @@ const ProductListCard = () => {
           </div>
         ))}
       </div>
-      <div className="text-xs">
+      <div className="text-xs sm:my-12">
         <button className="border rounded-l-lg h-14 w-20 text-[#737373] bg-[#BDBDBD] ">
           First
         </button>

@@ -1,11 +1,11 @@
 const ProductListFilter = () => {
   return (
-    <div className=" w-full font-['montserrat'] my-4 ">
-      <div className="flex justify-around container mx-auto p-4 h-12 items-center text-[#737373]">
-        <div className="flex items-center font-bold text-sm ">
+    <div className=" w-full font-['montserrat'] my-4 sm:py-4 ">
+      <div className="flex lg:flex-row sm:flex-col sm:py-4 sm:h-28 justify-around container mx-auto p-4 h-12 items-center text-[#737373]">
+        <div className="flex items-center font-bold text-sm sm:pt-4">
           <p>Showing all 112 results</p>
         </div>
-        <div className="flex items-center font-normal text-sm gap-3">
+        <div className="flex items-center font-normal text-sm gap-3 sm:py-4">
           <p>Wiews:</p>
           <button class="flex items-center justify-center w-9 h-9 border rounded-md hover:bg-[#737373] transition-colors duration-300">
             <img
@@ -22,7 +22,7 @@ const ProductListFilter = () => {
             />
           </button>
         </div>
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row gap-2 sm:pb-4">
           <div className=" flex flex-row font-normal text-sm border-light border-[#737373] rounded-md">
             <select name="filter" id="filter">
               <option value="Popularity">Popularity</option>
@@ -30,7 +30,7 @@ const ProductListFilter = () => {
               <option value="Best Seller">Best Seller</option>
             </select>
           </div>
-          <button className="text-white bg-[#23A6F0] py-4 px-10 rounded">
+          <button className="text-white bg-[#23A6F0] py-2 px-8 rounded">
             Filter
           </button>
         </div>
