@@ -14,8 +14,8 @@ const ProductCard = () => {
   };
   return (
     <div className="bg-[#FAFAFA] py-3">
-      <div className="flex flex-row justify-center font-['montserrat'] gap-3 text-sm text-[#737373] font-bold ">
-        <div className="flex-1 ml-28">
+      <div className="flex lg:flex-row sm:flex-col justify-center font-['montserrat'] gap-3 text-sm text-[#737373] font-bold ">
+        <div className="flex-1 lg:ml-28 sm:mx-8 sm:flex-col lg:h-[480px]">
           <Carousel
             className=""
             activeIndex={activeIndex}
@@ -32,24 +32,30 @@ const ProductCard = () => {
                   />
                 ))}
               </div>
-              
             )}
           >
             {images.map((image, index) => (
-              <div key={index} data-src={image} className="item relative">
+              <div key={index} data-src={image} className="item relative ">
                 <img
                   src={image}
                   alt={`image ${index + 1}`}
                   onClick={ImageHandler}
-                  className={`w-full h-auto object-contain ${
+                  className={`w-full lg:h-45 object-contain ${
                     activeIndex === index ? "filter-none" : "filter-grayscale"
-                    
                   }`}
-                
                 />
               </div>
             ))}
           </Carousel>
+          <div className="flex flex-row lg:ml-0 sm:mx-0 sm:items-start py-2 gap-3">
+            {images.map((img, i) => (
+              <img
+                src={img}
+                className="opacity-50 w-24 h-[75px]"
+                onClick={ImageHandler}
+              ></img>
+            ))}
+          </div>
         </div>
 
         <div className=" flex flex-1 flex-col text-start gap-5 mx-20">
@@ -90,15 +96,6 @@ const ProductCard = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex flex-row ml-28 py-6 gap-3">
-        {images.map((img, i) => (
-          <img
-            src={img}
-            className="opacity-50 w-24 h-[75px]"
-            onClick={ImageHandler}
-          ></img>
-        ))}
       </div>
     </div>
   );

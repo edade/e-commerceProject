@@ -1,6 +1,6 @@
 const ProductDescription = () => {
   return (
-    <div className="font-montserrat text-[#737373]">
+    <div className="font-montserrat flex flex-col  text-[#737373] py-28">
       <div className="flex justify-center gap-12 text-md font-semibold py-8">
         <a>Description</a>
         <a>Additional Information</a>
@@ -8,8 +8,8 @@ const ProductDescription = () => {
           Reviews <span className="text-[#23856D]">(0)</span>
         </a>
       </div>
-      <div className="flex justify-center gap-8">
-        <div className="w-[25%]">
+      <div className="flex lg:flex-row sm:flex-col sm:justify-center sm:items-center lg:justify-center lg:items-start gap-8">
+        <div className="lg:w-[25%] sm:w-full px-10">
           <img
             className=" w-full h-[85%] object-contain items-center"
             src="./img/ProductPage/image1.png"
