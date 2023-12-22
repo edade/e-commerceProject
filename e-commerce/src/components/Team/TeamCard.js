@@ -58,22 +58,22 @@ const TeamCard = () => {
   return (
     <div className="font-['montserrat'] py-20">
         <div className="items-center text-3xl font-bold text-[#252B42]">Meet Our Team</div>
-      <div className="flex flex-wrap justify-center gap-8 ">
+      <div className="flex lg:flex-wrap lg:flex-row sm:flex-col justify-center gap-8 ">
         {TeamData.map((teamMember, index) => (
-          <div key={index} className="font-bold py-10">
+          <div key={index} className="font-bold py-10 ">
             <img
-              className=""
+              className="sm:w-full sm:px-10 lg:px-0"
               src={teamMember.image}
               alt={`Team member ${index + 1}`}
             />
             <div className="flex flex-col gap-3 font-semibold">
-              <h5 className="text-base text-[#252B42] pt-3 ">
+              <h5 className="lg:text-base sm:text-2xl text-[#252B42] pt-3 ">
                 {teamMember.username}
               </h5>
-              <h6 className="text-sm text-[#737373] ">
+              <h6 className="lg:text-sm sm:text-2xl text-[#737373] ">
                 {teamMember.profession}
               </h6>
-              <div className="flex gap-4 justify-center text-2xl text-[#23A6F0]">
+              <div className="flex gap-4 justify-center lg:text-2xl sm:text-4xl text-[#23A6F0]">
                 <a href={teamMember.socialMedia.facebook}>
                   <i className="bx bxl-facebook-circle"></i>
                 </a>

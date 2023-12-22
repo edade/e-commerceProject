@@ -14,10 +14,10 @@ const Team = () => {
               of Classical physics: Newtonian mechanics
             </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-8 pt-28">
+          <div className="flex lg:flex-wrap lg:flex-row sm:flex-col justify-center gap-8 pt-28">
             {TeamData.map((teamMember, index) => (
               <div key={index} className="font-bold">
-                <img className="" src={teamMember.image} alt={`Team member ${index + 1}`} />
+                <img className="sm:w-full sm:px-10" src={teamMember.image} alt={`Team member ${index + 1}`} />
                 <div className="flex flex-col gap-3 font-semibold">
                   <h5 className="text-base text-[#252B42] pt-3 ">{teamMember.username}</h5>
                   <h6 className="text-sm text-[#737373] ">{teamMember.profession}</h6>

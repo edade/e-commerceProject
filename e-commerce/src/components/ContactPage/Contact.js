@@ -2,14 +2,14 @@ import { Button } from "@material-tailwind/react";
 
 const Contact = () => {
   return (
-    <div className="font-['Montserrat'] text-[#252B42]">
+    <div className="font-['Montserrat'] text-[#252B42] ">
       <div className="flex flex-col items-center gap-4">
         <p className="text-center text-sm font-bold">VISIT OUR OFFICE</p>
         <h3 className="text-center text-3xl font-bold max-w-xl">
           We help small businesses with big ideas
         </h3>
       </div>
-      <div className="flex justify-center py-20   ">
+      <div className="flex lg:flex-row sm:flex-col justify-center py-20   ">
         <div className=" flex flex-col items-center gap-2 p-14 ">
           <i className="bx bx-phone text-7xl text-[#23A6F0] "></i>
           <p className="text-center text-sm font-bold">

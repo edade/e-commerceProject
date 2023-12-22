@@ -5,7 +5,7 @@ const Testimonials = () => {
       <div className="w-full flex justify-center font-['montserrat']">
         <div className="flex w-full">
           <div className="w-full flex justify-center items-center bg-[#2A7CC7]">
-            <div className="w-3/4 gap-8 py-24 flex flex-col items-start  text-white">
+            <div className="w-3/4 gap-8 py-24 flex flex-col lg:items-start sm:items-center  text-white">
               <h2 className="font-semibold text-lg ">WORK WITH US</h2>
               <h3 className="font-bold tracking-wider text-4xl">
                 Now Let’s grow Yours
@@ -19,7 +19,7 @@ const Testimonials = () => {
               </Button>
             </div>
           </div>
-          <div className="w-2/3">
+          <div className="w-2/3 hidden md:block">
             <img className="w-full " src="./img/AboutPage/woman.png" />
           </div>
         </div>
