@@ -9,7 +9,7 @@ const AboutHeader = () => {
               ABOUT COMPANY
             </h5>
             <h1 className="text-[#252B42] text-4xl font-bold">ABOUT US</h1>
-            <p className="py-8 text-[#737373] lg:px-0 sm:px-80">
+            <p className="py-8 text-[#737373] lg:px-0 sm:px-7">
               We know how large objects will act, but things on a small scale
             </p>
             <button className="text-white bg-[#23A6F0] py-4 px-8 rounded">

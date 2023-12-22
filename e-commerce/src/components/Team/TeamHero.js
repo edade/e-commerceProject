@@ -6,12 +6,12 @@ const TeamHero = () => {
         </div>
         <div className="flex flex-col gap-1">
           <div className="flex flex-row overflow-hidden gap-1 sm:px-8 lg:px-0">
-            <img src="./img/TeamPage/img2.png" className="sm:w-full "></img>
-            <img src="./img/TeamPage/img3.png" className="sm:w-full "></img>
+            <img src="./img/TeamPage/img2.png" className="sm:w-1/2 "></img>
+            <img src="./img/TeamPage/img3.png" className="sm:w-1/2 "></img>
           </div>
           <div className="flex flex-row overflow-hidden gap-1 sm:px-8 lg:px-0">
-            <img src="./img/TeamPage/img4.png" className="sm:w-full "></img>
-            <img src="./img/TeamPage/img5.png" className="sm:w-full "></img>
+            <img src="./img/TeamPage/img4.png" className="sm:w-1/2 "></img>
+            <img src="./img/TeamPage/img5.png" className="sm:w-1/2 "></img>
           </div>
         </div>
       </div>

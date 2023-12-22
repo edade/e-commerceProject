@@ -14,7 +14,7 @@ const Testimonials = () => {
                 The gradual accumulation of information about atomic and
                 small-scale behavior during the first quarter of the 20th
               </p>
-              <Button className="tracking-wider text-sm py-4 w-1/4 text-center bg-[#2A7CC7] border border-white">
+              <Button className="tracking-wider text-sm sm:px-4 py-4 w-2/4 text-center bg-[#2A7CC7] border border-white">
                 Button
               </Button>
             </div>

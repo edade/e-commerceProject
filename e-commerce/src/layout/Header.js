@@ -49,11 +49,11 @@ const Header = () => {
           Bandage
         </Link>
         <div className="flex lg:flex-row sm:flex-col  lg:w-[68.25rem] lg:mr-[8.5rem] lg:justify-around h-26 items-center">
-          <nav className="flex lg:flex-row sm:flex-col sm:py-6 sm:justify-center lg:w-[22.5rem] lg:justify-between sm:py-4 font-semibold text-[#737373]">
+          <nav className="flex lg:flex-row sm:flex-col sm:py-6 sm:justify-center lg:w-[22.5rem] lg:justify-between font-semibold text-[#737373]">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/products">Shop</NavLink>
             <NavLink to="/about">About</NavLink>
-            <NavLink to="/blog">Blog</NavLink>
+            <NavLink to="/blog">Team</NavLink>
             <NavLink to="/contact">Contact</NavLink>
             <NavLink to="/pages">Pages</NavLink>
           </nav>

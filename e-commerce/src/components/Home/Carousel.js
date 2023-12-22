@@ -32,7 +32,7 @@ export default function Carousel({ slides }) {
         </button>
         <div className="flex flex-col items-center text-center">
           <h1 className=" lg:text-3xl sm:text-lg  text-white text-center font-bold">GROCERIES DELIVERY</h1>
-          <p className="w-[20rem] m-auto font-normal text-center text-white sm:text-base lg:text-xl py-4">
+          <p className="w-[20rem] m-auto font-normal text-center text-white sm:text-xs lg:text-xl py-4">
             We know how large objects will act, but things on a small scale just
             do not act that way.
           </p>
