@@ -7,6 +7,7 @@ import ProductPage from "./pages/ProductPage";
 import AboutPage from "./pages/AboutPage";
 import TeamPage from "./pages/TeamPage";
 import ContactPage from "./pages/ContactPage";
+import SignUpPage from "./pages/SignUpPage";
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route exact path="/contact">
           <ContactPage/>
+        </Route>
+        <Route exact path="/signup">
+          <SignUpPage/>
         </Route>
       </Switch>
     </div>

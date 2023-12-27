@@ -63,7 +63,7 @@ const Header = () => {
 
               <NavLink to="/login">Login /</NavLink>
 
-              <NavLink to="/register">Register</NavLink>
+              <NavLink to="/signup">Register</NavLink>
             </div>
             <div className="flex lg:flex-row sm:flex-col lg:w-[9.875rem] lg:justify-between px-3 items-center text-[#23A6F0]">
               <div className="flex items-center ">
