@@ -8,7 +8,7 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-    control, 
+    control,
     watch,
   } = useForm();
 
@@ -19,7 +19,7 @@ const SignUp = () => {
     console.log(data);
   };
   return (
-    <div className="container mt-5 w-[30%] font-['montserrat'] font-bold">
+    <div className="container my-5 w-[30%] font-['montserrat'] font-bold">
       <h2 className="text-2xl font-bold justify-center items-center py-10">
         SIGN UP
       </h2>
@@ -129,61 +129,82 @@ const SignUp = () => {
           <>
             <Form.Group controlId="storeName">
               <Form.Label>Store Name</Form.Label>
-              <Controller
-                name="storeName"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <Form.Control type="text" {...field} />
-                )}
+
+              <Form.Control
+                type="text"
+                {...register("storeName", {
+                  required: "Store name is required",
+                  minLength: {
+                    value: 3,
+                    message: "Store name should be at least three characters",
+                  },
+                })}
               />
+
               {errors.storeName && (
-                <Form.Text className="text-danger">{errors.storeName.message}</Form.Text>
+                <Form.Text className="text-danger">
+                  {errors.storeName.message}
+                </Form.Text>
               )}
             </Form.Group>
 
             <Form.Group controlId="storePhone">
               <Form.Label>Store Phone</Form.Label>
-              <Controller
-                name="storePhone"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <Form.Control type="text" {...field} />
-                )}
+              <Form.Control
+                placeholder=""
+                type="text"
+                {...register("storePhone", {
+                  required: "Store phone is required",
+                  pattern: {
+                    value: /^\+90(5\d{9})$/,
+                    message:
+                      "Enter a valid Turkish phone number starting with +90",
+                  },
+                })}
               />
               {errors.storePhone && (
-                <Form.Text className="text-danger">{errors.storePhone.message}</Form.Text>
+                <Form.Text className="text-danger">
+                  {errors.storePhone.message}
+                </Form.Text>
               )}
             </Form.Group>
 
             <Form.Group controlId="storeTaxId">
               <Form.Label>Store Tax ID</Form.Label>
-              <Controller
-                name="storeTaxId"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <Form.Control type="text" {...field} />
-                )}
+              <Form.Control
+                placeholder="TXXXXVXXXXXX"
+                type="text"
+                {...register("storeTaxId", {
+                  required: "Tax ID is required",
+                  pattern: {
+                    value: /T\d{4}V\d{6}/,
+                    message: "Enter a valid Tax ID",
+                  },
+                })}
               />
               {errors.storeTaxId && (
-                <Form.Text className="text-danger">{errors.storeTaxId.message}</Form.Text>
+                <Form.Text className="text-danger">
+                  {errors.storeTaxId.message}
+                </Form.Text>
               )}
             </Form.Group>
 
-            <Form.Group controlId="storeBankAccount">
+            <Form.Group className="py-4" controlId="storeBankAccount">
               <Form.Label>Store Bank Account</Form.Label>
-              <Controller
-                name="storeBankAccount"
-                control={control}
-                defaultValue=""
-                render={({ field }) => (
-                  <Form.Control type="text" {...field} />
-                )}
+              <Form.Control
+                type="text"
+                {...register("storeBankAccount", {
+                  required: "IBAN number is required",
+                  pattern: {
+                    value: /TR\d{24}/,
+                    message: "Please enter valid IBAN number",
+                  },
+                })}
               />
               {errors.storeBankAccount && (
-                <Form.Text className="text-danger">{errors.storeBankAccount.message}</Form.Text>
+                <Form.Text className="text-danger">
+                  {errors.storeBankAccount.message}
+                </Form.Text>
               )}
             </Form.Group>
           </>
