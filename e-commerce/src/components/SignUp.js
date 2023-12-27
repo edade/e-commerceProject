@@ -1,23 +1,85 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { AxiosInstance } from "../api/api";
 import { useForm, Controller } from "react-hook-form";
 import Form from "react-bootstrap/Form";
 import { Button } from "@material-tailwind/react";
+import { useHistory } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     control,
     watch,
+    setValue,
+    
+    formState: { errors, isValid },
   } = useForm();
 
+  const [roles, setRoles] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const selectedRole = watch("role_id");
   const password = watch("password", "");
   const role = watch("role", "customer");
 
+  const history = useHistory();
+
+  useEffect(() => {
+    setIsLoading(true);
+    AxiosInstance.get("/roles")
+      .then((response) => {
+        console.log("Roles Data", response.data);
+        setRoles(response.data);
+        setValue("role_id", response.data[0]?.id);
+      })
+      .catch((error) => {
+        console.error("Error fetching roles:", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [setValue]);
+
   const onSubmit = (data) => {
-    console.log(data);
+    setIsLoading(true);
+    const formData = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      role_id: selectedRole,
+    };
+
+    if (selectedRole === "2") {
+      formData.store = {
+        name: data.storeName,
+        phone: data.storePhone,
+        tax_no: data.storeTaxId,
+        bank_account: data.storeBankAccount,
+      };
+    }
+
+    AxiosInstance.post("/signup", formData)
+      .then((response) => {
+        console.log("Registration successful", response);
+        toast.success("Congratulations! You've successfully signed up!");
+        toast.warning(
+          "You need to click the link in the email to activate your account!"
+        );
+        history.goBack();
+      })
+      .catch((error) => {
+        console.error("Registration failed!", error);
+        console.log(error);
+        toast.error("Registration failed!");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
+
   return (
     <div className="container my-5 w-[30%] font-['montserrat'] font-bold">
       <h2 className="text-2xl font-bold justify-center items-center py-10">
@@ -110,22 +172,28 @@ const SignUp = () => {
           )}
         </Form.Group>
 
-        <Form.Group className="py-4 flex items-center gap-2" controlId="role">
+        <Form.Group controlId="role_id" className="mb-6">
           <Form.Label>Role</Form.Label>
-          <Controller
-            name="role"
-            control={control}
-            defaultValue="customer"
-            render={({ field }) => (
-              <Form.Control as="select" {...field}>
-                <option value="customer">Customer</option>
-                <option value="store">Store</option>
-              </Form.Control>
-            )}
-          />
+          <select
+            id="role_id"
+            {...register("role_id", { required: "Role is required" })}
+            className="form-select w-full p-3 border border-solid bg-ltGrey border-ltGrey rounded-lg text-sm"
+            value={watch("role_id")}
+          >
+            {roles.map((role) => (
+              <option key={role.id} value={role.id}>
+                {role.name}
+              </option>
+            ))}
+          </select>
+          {errors.role_id && (
+            <Form.Text className="text-danger">
+              {errors.role_id.message}
+            </Form.Text>
+          )}
         </Form.Group>
 
-        {role === "store" && (
+        {selectedRole === "2" && (
           <>
             <Form.Group controlId="storeName">
               <Form.Label>Store Name</Form.Label>
@@ -209,8 +277,9 @@ const SignUp = () => {
             </Form.Group>
           </>
         )}
-        <Button type="submit">Submit</Button>
+        <Button disabled={!isValid} type="submit">Submit</Button>
       </Form>
+    
     </div>
   );
 };

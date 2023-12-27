@@ -8,10 +8,13 @@ import AboutPage from "./pages/AboutPage";
 import TeamPage from "./pages/TeamPage";
 import ContactPage from "./pages/ContactPage";
 import SignUpPage from "./pages/SignUpPage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <div className="App">
+      
       <Switch>
         <Route exact path="/">
           <Home />
@@ -35,6 +38,7 @@ function App() {
           <SignUpPage/>
         </Route>
       </Switch>
+      <ToastContainer />
     </div>
   );
 }
