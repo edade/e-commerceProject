@@ -33,7 +33,7 @@ const SignUp = () => {
       .then((response) => {
         console.log("Roles Data", response.data);
         setRoles(response.data);
-        setValue("role_id", response.data[0]?.id);
+        setValue("role_id", response.data[2]?.id);
       })
       .catch((error) => {
         console.error("Error fetching roles:", error);
