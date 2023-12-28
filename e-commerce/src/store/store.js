@@ -4,7 +4,7 @@ import { userReducer } from "./reducers/UserReducer";
 import { ProductReducer } from "./reducers/ProductReducer";
 import { ShoppingCardReducer } from "./reducers/ShoppingCardReducer";
 import { thunk } from "redux-thunk";
-import logger from "redux-logger";
+import { logger } from "./middleware/logger";
 
 
 export const reducers = combineReducers({

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AxiosInstance } from "../api/api";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
 import { Button } from "@material-tailwind/react";
 import { useHistory } from "react-router-dom";

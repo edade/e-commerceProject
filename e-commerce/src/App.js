@@ -13,13 +13,14 @@ import  { useDispatch} from "react-redux";
 import { fetchRoles } from "./store/thunk/fetchRoles";
 import { useEffect } from "react";
 import { fetchCategories } from "./store/thunk/fetchCategories";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchRoles())
-    dispatch(fetchCategories())
+   // dispatch(fetchCategories())
   }, [dispatch])
   return (
     <div className="App">
@@ -46,6 +47,10 @@ function App() {
         <Route exact path="/signup">
           <SignUpPage/>
         </Route>
+        <Route exact path="/login">
+          <LoginPage/>
+        </Route>
+      
       </Switch>
       <ToastContainer />
     </div>
