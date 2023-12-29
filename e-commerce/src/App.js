@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchRoles())
-   // dispatch(fetchCategories())
+    //dispatch(fetchCategories())
   }, [dispatch])
   return (
     <div className="App">

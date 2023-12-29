@@ -277,7 +277,7 @@ const SignUp = () => {
             </Form.Group>
           </>
         )}
-        <Button disabled={!isValid} type="submit">Submit</Button>
+        <Button type="submit">Submit</Button>
       </Form>
     
     </div>
