@@ -19,7 +19,7 @@ export const userReducer = (state = userInitial, action) => {
     case "USER_CHANGE_PASSWORD":
       return { ...state, password: action.payload };
 
-    case "USER_CHANGE_ROLE":
+    case "CHANGE_ROLE":
       return { ...state, role_id: action.payload };
 
     default:
