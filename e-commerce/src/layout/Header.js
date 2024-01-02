@@ -1,11 +1,13 @@
 import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 const Header = () => {
   const location = useLocation();
 
   const isProductPage = location.pathname === "/pages";
   const isProductListPage = location.pathname === "/products";
-
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   return (
     <header>
@@ -40,7 +42,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      ) : null }
+      ) : null}
       <div className="flex lg:flex-row sm:flex-col sm: justify-between mt-2 items-center font-['montserrat']">
         <Link
           to="/"
@@ -58,13 +60,21 @@ const Header = () => {
             <NavLink to="/pages">Pages</NavLink>
           </nav>
           <div className="flex lg:flex-row sm:flex-col">
-            <div className="flex items-center w-[12.5rem] justify-around px-4 font-semibold sm:pb-4 text-[#23A6F0]">
-              <img className="h-[1em] " src="./img/login.png" alt="" />
+            {user.email ? (
+              <div className="flex items-center w-auto justify-around px-4 font-semibold lg:pb-0 sm:pb-4 text-[#23A6F0]">
+                <p>Welcome {user.name} </p>
 
-              <NavLink to="/login">Login /</NavLink>
+                <Link to="/" className="px-2">Logout</Link>
+              </div>
+            ) : (
+              <div className="flex items-center w-[12.5rem] justify-around px-4 font-semibold sm:pb-4 text-[#23A6F0]">
+                <img className="h-[1em] " src="./img/login.png" alt="" />
 
-              <NavLink to="/signup">Register</NavLink>
-            </div>
+                <NavLink to="/login">Login /</NavLink>
+
+                <NavLink to="/signup">Register</NavLink>
+              </div>
+            )}
             <div className="flex lg:flex-row sm:flex-col lg:w-[9.875rem] lg:justify-between px-3 items-center text-[#23A6F0]">
               <div className="flex items-center ">
                 <img
