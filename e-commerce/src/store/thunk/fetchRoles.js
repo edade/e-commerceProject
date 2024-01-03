@@ -7,8 +7,7 @@ export const fetchRoles = () => {
   return async (dispatch) => {
     try {
       const response = await AxiosInstance.get("/roles");
-      const roles = response.data;
-      dispatch(setRoles(roles));
+      dispatch(setRoles(response.data));
     } catch (error) {
       console.error("Error fetching roles:", error);
     }
