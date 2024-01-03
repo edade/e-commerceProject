@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 const Header = () => {
   const location = useLocation();
 
@@ -8,6 +9,11 @@ const Header = () => {
   const isProductListPage = location.pathname === "/products";
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const handleLogout = () => {
+  
+    localStorage.removeItem("token");
+    dispatch({ type: "USER_LOGOUT" });
+  };
 
   return (
     <header>
@@ -60,14 +66,22 @@ const Header = () => {
             <NavLink to="/pages">Pages</NavLink>
           </nav>
           <div className="flex lg:flex-row sm:flex-col">
-            {user.email ? (
+            {user.token ? (
               <div className="flex items-center w-auto justify-around px-4 font-semibold lg:pb-0 sm:pb-4 text-[#23A6F0]">
                 <p>Welcome {user.name} </p>
-
-                <Link to="/" className="px-2">Logout</Link>
+                {user.gravatar && (
+                  <img
+                    className="h-[2em] rounded-full ml-2"
+                    src={user.gravatar}
+                    alt={`${user.name}'s Gravatar`}
+                  />
+                )}
+            <button onClick={handleLogout} className="px-2">
+              Logout
+            </button>
               </div>
             ) : (
-              <div className="flex items-center w-[12.5rem] justify-around px-4 font-semibold sm:pb-4 text-[#23A6F0]">
+              <div className="flex items-center w-[12.5rem] justify-around px-4 font-semibold lg:pb-0 sm:pb-4 text-[#23A6F0]">
                 <img className="h-[1em] " src="./img/login.png" alt="" />
 
                 <NavLink to="/login">Login /</NavLink>
