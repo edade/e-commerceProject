@@ -1,13 +1,15 @@
-export const storeChangeName = (name) => {
-    return { type: "USER_CHANGE_NAME", payload: name };
+export const userChange = (userData) => {
+    return { type: "USER_LOGIN_SUCCESS", payload: userData };
   };
 
-  export const storeChangeEmail = (mail) => {
-    return { type: "USER_CHANGE_EMAIL", payload: mail };
+  export const userLogout = () => {
+    localStorage.removeItem("token");
+    return {
+      type: "USER_LOGOUT",
+    };
   };
-  export const storeChangePassword = (password) => {
-    return { type: "USER_CHANGE_PASSWORD", payload: password };
-  };
-  export const storeChangeRole = (role) => {
-    return { type: "USER_CHANGE_ROLE", payload: role };
+
+
+  export const userInitialLoad = () => {
+    return { type: "USER_INITIAL_LOAD" };
   };
