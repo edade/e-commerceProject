@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
+import { renewAxiosInstance } from "../api/api";
 const Header = () => {
   const location = useLocation();
 
@@ -13,6 +13,7 @@ const Header = () => {
   
     localStorage.removeItem("token");
     dispatch({ type: "USER_LOGOUT" });
+    renewAxiosInstance();
   };
 
   return (
