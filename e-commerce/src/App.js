@@ -25,14 +25,13 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchRoles());
-    dispatch(fetchCategories())
+    dispatch(fetchCategories());
   }, [dispatch]);
 
   const verifyHandler = async () => {
     try {
       const response = await AxiosInstance.get("/verify");
 
-      toast.success("Successfully Logged In !");
       dispatch(
         userChange({
           name: response.data.name,
