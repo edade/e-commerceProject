@@ -25,7 +25,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchRoles());
-    //dispatch(fetchCategories())
+    dispatch(fetchCategories())
   }, [dispatch]);
 
   const verifyHandler = async () => {
