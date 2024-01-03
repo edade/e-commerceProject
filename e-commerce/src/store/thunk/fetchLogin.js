@@ -1,17 +1,11 @@
-import { AxiosInstance } from "../../api/api";
+import { AxiosInstance, renewAxiosInstance } from "../../api/api";
 import { toast } from "react-toastify";
-import {
-  storeChangeName,
-  storeChangeEmail,
-  storeChangePassword,
-  storeChangeRole,
-} from "../actions/userAction";
+import { userChange, userLogout } from "../actions/userAction";
+import gravatar from "gravatar";
 
 export const fetchLogin = (formData, history) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: "USER_LOGIN_START" });
-
       const response = await AxiosInstance.post("/login", formData);
 
       const userData = {
@@ -19,31 +13,20 @@ export const fetchLogin = (formData, history) => {
         name: response.data.name,
         role_id: response.data.role_id,
         token: response.data.token,
+        gravatar: gravatar.url(response.data.email, {
+          s: "200",
+          r: "pg",
+          d: "identicon",
+        }),
       };
 
-      dispatch({
-        type: "USER_LOGIN_SUCCESS",
-        payload: userData,
-      });
+      dispatch(userChange(userData));
 
-      dispatch(storeChangeName(userData.name));
-      dispatch(storeChangeEmail(userData.email));
-      dispatch(storeChangePassword(response.data.password));
-      dispatch(storeChangeRole(userData.role_id));
-
-      console.log("Login successful", response);
       toast.success("Congratulations! You've successfully logged in!");
       history.push("/");
     } catch (error) {
-      dispatch({
-        type: "USER_LOGIN_FAILURE",
-        payload: error.message,
-      });
-
       console.error("Login failed!", error);
       toast.error("Login failed!");
-    } finally {
-      dispatch({ type: "USER_LOGIN_END" });
     }
   };
 };
