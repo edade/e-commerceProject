@@ -28,7 +28,7 @@ const Login = () => {
   return (
     <div>
      
-      <div className="container my-5 w-[30%] font-['montserrat'] font-bold">
+      <div className="container my-5 w-[30%] font-['montserrat'] font-bold border rounded-lg border-[#252B42] py-3">
         <h2 className="text-2xl font-bold justify-center items-center py-10">
           LOG IN
         </h2>

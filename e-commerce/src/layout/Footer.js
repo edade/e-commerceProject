@@ -4,7 +4,7 @@ const Footer = () => {
   return (
 
 <div className="lg:w-full sm:min-w-min flex flex-col lg:items-center sm:items-center sm:justify-center justify-around gap-y-16 bg-[#252B42] font-['montserrat']">
-<div className="lg:items-start  sm:w-[80%] sm:items-center sm:justify-center  flex flex-col h-60 py-0  text-white lg:flex-row lg:w-[95%] lg:h-[8.875rem] lg:py-10 lg:justify-between">
+<div className="lg:items-start  sm:w-[80%] sm:items-center sm:justify-center  flex flex-col h-60 py-4  text-white lg:flex-row lg:w-[95%] lg:h-[8.875rem] lg:py-10 lg:justify-between">
   <div className="flex flex-col text-left">
     <h3 className="font-bold text-2xl leading-8 tracking-wide">
       Consulting Agency For Your Business
@@ -13,7 +13,7 @@ const Footer = () => {
       the quick fox jumps over the lazy dog
     </p>
   </div>
-  <button className="text-white bg-[#23A6F0] py-4 px-10 rounded">
+  <button className="text-white bg-[#23A6F0] py-3 px-8 rounded">
     Contact Us
   </button>
 </div>
