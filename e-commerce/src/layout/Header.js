@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { renewAxiosInstance } from "../api/api";
@@ -10,11 +10,41 @@ const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const handleLogout = () => {
-  
     localStorage.removeItem("token");
     dispatch({ type: "USER_LOGOUT" });
     renewAxiosInstance();
   };
+
+  const categories = useSelector((state) => state.global.categories);
+
+  // State to control dropdown visibility
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedGender, setSelectedGender] = useState(null);
+
+  // Function to handle dropdown visibility
+  const handleDropdownVisibility = (visible) => {
+    setDropdownVisible(visible);
+  };
+
+  const handleGenderSelect = (gender) => {
+    setSelectedGender(gender);
+  };
+  // Function to handle category selection
+  const handleCategoryClick = (category) => {
+    // Burada istediğiniz URL'ye yönlendirebilirsiniz.
+    // Örnek olarak, "/products/category/:categoryId" şeklinde bir URL oluşturabilirsiniz.
+    console.log(`Selected category: ${category.title}`);
+    // Ayrıca dropdown'ı kapatın
+    setDropdownVisible(false);
+    setSelectedGender(null);
+  };
+
+  const womenCategories = categories.filter((category) =>
+    category.code.startsWith("k:")
+  );
+  const menCategories = categories.filter((category) =>
+    category.code.startsWith("e:")
+  );
 
   return (
     <header>
@@ -60,7 +90,72 @@ const Header = () => {
         <div className="flex lg:flex-row sm:flex-col  lg:w-[68.25rem] lg:mr-[8.5rem] lg:justify-around h-26 items-center">
           <nav className="flex lg:flex-row sm:flex-col sm:py-6 sm:justify-center lg:w-[22.5rem] lg:justify-between font-semibold text-[#737373]">
             <NavLink to="/">Home</NavLink>
-            <NavLink to="/products">Shop</NavLink>
+            <div
+              className="relative cursor-pointer flex"
+              onMouseEnter={() => handleDropdownVisibility(true)}
+              onMouseLeave={() => handleDropdownVisibility(true)}
+            >
+              <NavLink to="/products">Shop</NavLink>
+
+              {/* Kategori dropdown'ı */}
+              {isDropdownVisible && (
+                <div className="flex z-50  absolute top-full left-0 mt-2 bg-white border border-gray-300 shadow-md rounded-md">
+                  <div className="relative cursor-pointer">
+                    <div
+                      onMouseEnter={() => handleGenderSelect("women")}
+                      className={`cursor-pointer py-2 px-4 hover:bg-gray-100 ${
+                        selectedGender === "women" && "bg-gray-100"
+                      }`}
+                    >
+                      Women
+                      {selectedGender === "women" && (
+                        <div className="absolute top-full left-0 mt-2 bg-white border border-gray-300 shadow-md rounded-md">
+                          <ul>
+                            {womenCategories.map((category) => (
+                              <li
+                                key={category.id}
+                                onClick={() => handleCategoryClick(category)}
+                                className="cursor-pointer py-2 px-4 hover:bg-gray-100"
+                              >
+                                {category.title}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Men */}
+                  <div className="relative cursor-pointer">
+                    <div
+                      onMouseEnter={() => handleGenderSelect("men")}
+                      className={`cursor-pointer py-2 px-4 hover:bg-gray-100 ${
+                        selectedGender === "men" && "bg-gray-100"
+                      }`}
+                    >
+                      Men
+                      {selectedGender === "men" && (
+                        <div className="absolute top-full left-0 mt-2 bg-white border border-gray-300 shadow-md rounded-md">
+                          <ul>
+                            {menCategories.map((category) => (
+                              <li
+                                key={category.id}
+                                onClick={() => handleCategoryClick(category)}
+                                className="cursor-pointer py-2 px-4 hover:bg-gray-100"
+                              >
+                                {category.title}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <NavLink to="/about">About</NavLink>
             <NavLink to="/blog">Team</NavLink>
             <NavLink to="/contact">Contact</NavLink>
@@ -77,9 +172,9 @@ const Header = () => {
                     alt={`${user.name}'s Gravatar`}
                   />
                 )}
-            <button onClick={handleLogout} className="px-2">
-              Logout
-            </button>
+                <button onClick={handleLogout} className="px-2">
+                  Logout
+                </button>
               </div>
             ) : (
               <div className="flex items-center w-[12.5rem] justify-around px-4 font-semibold lg:pb-0 sm:pb-4 text-[#23A6F0]">
