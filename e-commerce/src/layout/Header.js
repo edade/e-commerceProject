@@ -24,6 +24,9 @@ const Header = () => {
   const handleDropdownVisibility = (visible) => {
     setDropdownVisible(visible);
   };
+  const handleMouseLeave = () => {
+    setDropdownVisible(false);
+  };
 
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
@@ -93,7 +96,6 @@ const Header = () => {
             <div
               className="relative cursor-pointer flex"
               onMouseEnter={() => handleDropdownVisibility(true)}
-              onMouseLeave={() => handleDropdownVisibility(true)}
             >
               <NavLink to="/products">Shop</NavLink>
 
@@ -108,7 +110,10 @@ const Header = () => {
                     >
                       Women
                       {selectedGender === "women" && (
-                        <div className="absolute top-full left-0 mt-2 bg-white border border-gray-300 shadow-md rounded-md">
+                        <div
+                          onMouseLeave={handleMouseLeave}
+                          className="absolute top-full left-0 mt-2 bg-white border border-gray-300 shadow-md rounded-md"
+                        >
                           <ul>
                             {womenCategories.map((category) => (
                               <li
@@ -134,7 +139,10 @@ const Header = () => {
                     >
                       Men
                       {selectedGender === "men" && (
-                        <div className="absolute top-full left-0 mt-2 bg-white border border-gray-300 shadow-md rounded-md">
+                        <div
+                          onMouseLeave={handleMouseLeave}
+                          className="absolute top-full left-0 mt-2 bg-white border border-gray-300 shadow-md rounded-md"
+                        >
                           <ul>
                             {menCategories.map((category) => (
                               <li
