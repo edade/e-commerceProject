@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { renewAxiosInstance } from "../api/api";
 const Header = () => {
   const location = useLocation();
+  const history = useHistory();
 
   const isProductPage = location.pathname === "/pages";
   const isProductListPage = location.pathname === "/products";
@@ -17,11 +18,9 @@ const Header = () => {
 
   const categories = useSelector((state) => state.global.categories);
 
-  // State to control dropdown visibility
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [selectedGender, setSelectedGender] = useState(null);
 
-  // Function to handle dropdown visibility
   const handleDropdownVisibility = (visible) => {
     setDropdownVisible(visible);
   };
@@ -29,12 +28,13 @@ const Header = () => {
   const handleGenderSelect = (gender) => {
     setSelectedGender(gender);
   };
-  // Function to handle category selection
+
   const handleCategoryClick = (category) => {
-    // Burada istediğiniz URL'ye yönlendirebilirsiniz.
-    // Örnek olarak, "/products/category/:categoryId" şeklinde bir URL oluşturabilirsiniz.
-    console.log(`Selected category: ${category.title}`);
-    // Ayrıca dropdown'ı kapatın
+    history.push(
+      `/shopping/${category.code.charAt(0) === "e" ? "erkek" : "kadin"}/${
+        category.title
+      }/`
+    );
     setDropdownVisible(false);
     setSelectedGender(null);
   };
@@ -97,7 +97,6 @@ const Header = () => {
             >
               <NavLink to="/products">Shop</NavLink>
 
-              {/* Kategori dropdown'ı */}
               {isDropdownVisible && (
                 <div className="flex z-50  absolute top-full left-0 mt-2 bg-white border border-gray-300 shadow-md rounded-md">
                   <div className="relative cursor-pointer">
@@ -126,7 +125,6 @@ const Header = () => {
                     </div>
                   </div>
 
-                  {/* Men */}
                   <div className="relative cursor-pointer">
                     <div
                       onMouseEnter={() => handleGenderSelect("men")}

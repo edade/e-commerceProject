@@ -10,12 +10,16 @@ const CategoryCard = () => {
         <a
           href={`/shopping/${
             category.code.charAt(0) === "e" ? "erkek" : "kadin"
-          }/${category.title}`}
+          }/${category.title}/${category.id}`}
           key={index}
           className="lg:w-60 sm:w-full sm:px-8"
         >
           <div className="relative shadow-xl hover:text-[#737373]">
-            <img src={category.img} alt="" className="w-full h-auto" />
+            <img
+              src={category.img}
+              alt=""
+              className="w-full h-full object-cover"
+            />
             <div className="absolute top-20 left-10 text-white">
               <h6 className="text-2xl font-bold">{category.title}</h6>
               {/* <h2 className="text-xs font-semibold w-[94px] pt-1 h-[64px]">5 item</h2> */}
