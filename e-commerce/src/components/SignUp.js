@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
 import { Button } from "@material-tailwind/react";
 import { useHistory } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const {
@@ -14,7 +14,7 @@ const SignUp = () => {
     control,
     watch,
     setValue,
-    
+
     formState: { errors, isValid },
   } = useForm();
 
@@ -63,6 +63,7 @@ const SignUp = () => {
 
     AxiosInstance.post("/signup", formData)
       .then((response) => {
+        console.log("Form Data:", formData);
         console.log("Registration successful", response);
         toast.success("Congratulations! You've successfully signed up!");
         toast.warning(
@@ -279,7 +280,6 @@ const SignUp = () => {
         )}
         <Button type="submit">Submit</Button>
       </Form>
-    
     </div>
   );
 };
