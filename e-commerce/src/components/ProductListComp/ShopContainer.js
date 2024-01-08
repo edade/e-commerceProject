@@ -7,7 +7,7 @@ const ShopContainer = () => {
         <NavLink to="/products">
           <h3 className="font-bold text-2xl text-[#252B42]">Shop</h3>
         </NavLink>
-        <div className="flex font-bold text-sm items-center sm:pt-10 space-x-1">
+        <div className="flex font-bold text-sm items-center sm:pt-10 lg:pt-0 space-x-1">
           <NavLink to="/" className="text-[#252B42]" exact>
             Home
           </NavLink>

@@ -10,7 +10,7 @@ const CategoryCard = () => {
         <a
           href={`/shopping/${
             category.code.charAt(0) === "e" ? "erkek" : "kadin"
-          }/${category.title}/${category.id}`}
+          }/${category.title}`}
           key={index}
           className="lg:w-60 sm:w-full sm:px-8"
         >

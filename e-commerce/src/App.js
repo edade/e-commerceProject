@@ -15,7 +15,6 @@ import { useEffect } from "react";
 import { fetchCategories } from "./store/thunk/fetchCategories";
 import LoginPage from "./pages/LoginPage";
 import { userChange, userLogout } from "./store/actions/userAction";
-import { fetchLogin } from "./store/thunk/fetchLogin";
 import { AxiosInstance } from "./api/api";
 import gravatar from "gravatar";
 

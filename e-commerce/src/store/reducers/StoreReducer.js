@@ -25,7 +25,7 @@ const storeInitialValues = {
       case "STORE_CHANGE_PASSWORD":
         return { ...state, password: action.payload };
   
-      case "STORE_CHANGE_ROLE":
+      case "_CHANGE_ROLE":
         return { ...state, role_id: action.payload };
   
       case "STORE_CHANGE_STORE_NAME":
