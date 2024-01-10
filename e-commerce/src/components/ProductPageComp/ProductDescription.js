@@ -1,4 +1,4 @@
-const ProductDescription = () => {
+const ProductDescription = ({ product }) => {
   return (
     <div className="font-montserrat flex flex-col  text-[#737373] py-28">
       <div className="flex justify-center gap-12 text-md font-semibold py-8">
@@ -12,7 +12,7 @@ const ProductDescription = () => {
         <div className="lg:w-[25%] sm:w-full px-10">
           <img
             className=" w-full h-[85%] object-contain items-center"
-            src="./img/ProductPage/image1.png"
+            src={product?.images[0]?.url}
             alt=""
           />
         </div>
@@ -43,7 +43,7 @@ const ProductDescription = () => {
             </h3>
             <p>
               <span>
-                 <i class="fa-light fa-greater-than"></i>
+                <i class="fa-light fa-greater-than"></i>
               </span>
               the quick fox jumps over the lazy dog
             </p>

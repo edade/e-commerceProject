@@ -1,7 +1,7 @@
 import { Carousel } from "@material-tailwind/react";
 import { useState } from "react";
 
-const ProductCard = () => {
+const ProductCard = (data) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [image, setImage] = useState(0);
   const images = [
@@ -12,6 +12,9 @@ const ProductCard = () => {
     setActiveIndex(index);
     setImage(images[index]);
   };
+
+  const product = data.product;
+
   return (
     <div className="bg-[#FAFAFA] py-3">
       <div className="flex lg:flex-row sm:flex-col justify-center font-['montserrat'] gap-3 text-sm text-[#737373] font-bold ">
@@ -34,10 +37,10 @@ const ProductCard = () => {
               </div>
             )}
           >
-            {images.map((image, index) => (
+            {product?.images.map((image, index) => (
               <div key={index} data-src={image} className="item relative ">
                 <img
-                  src={image}
+                  src={image.url}
                   alt={`image ${index + 1}`}
                   onClick={ImageHandler}
                   className={`w-full lg:h-45 object-contain ${
@@ -48,9 +51,9 @@ const ProductCard = () => {
             ))}
           </Carousel>
           <div className="flex flex-row lg:ml-0 sm:mx-0 sm:items-start py-2 gap-3">
-            {images.map((img, i) => (
+            {product?.images.map((img, i) => (
               <img
-                src={img}
+                src={img.url}
                 className="opacity-50 w-24 h-[75px]"
                 onClick={ImageHandler}
               ></img>
@@ -59,7 +62,7 @@ const ProductCard = () => {
         </div>
 
         <div className=" flex flex-1 flex-col text-start gap-5 mx-20">
-          <h4 className="text-xl font-bold text-[#252B42]">Floating Phone</h4>
+          <h4 className="text-xl font-bold text-[#252B42]">{product?.name}</h4>
           <div className="flex flex-row items-center gap-2">
             <i className="bx bxs-star text-[#F3CD03] "></i>
             <i className="bx bxs-star text-[#F3CD03] "></i>
@@ -68,16 +71,16 @@ const ProductCard = () => {
             <i className="bx bxs-star text-[#F3CD03] "></i>
             <p> 10 reviews</p>
           </div>
-          <h5 className="text-2xl font-bold text-[#252B42] ">$1,139.33</h5>
+          <h5 className="text-2xl font-bold text-[#252B42] ">
+            {product?.price}
+          </h5>
           <div className="flex flex-row gap-2">
             <h6>Availability :</h6>
-            <h6 className="text-[#23A6F0]">In Stock</h6>
+            <h6 className="text-[#23A6F0]">
+              {product?.stock > 0 ? "In Stock" : "Out of Stock"}
+            </h6>
           </div>
-          <p className=" font-semibold w-[70%] ">
-            Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.
-            RELIT official consequent door ENIM RELIT Mollie. Excitation venial
-            consequent sent nostrum met.
-          </p>
+          <p className=" font-semibold w-[70%] ">{product?.description}</p>
           <hr className="mr-28 font-bold"></hr>
           <div className="flex flex-row gap-2">
             <button class="w-5 h-5 bg-[#23A6F0] rounded-full "></button>
@@ -87,7 +90,7 @@ const ProductCard = () => {
           </div>
           <div className="flex gap-4 py-7">
             <button className="text-white bg-[#23A6F0] py-3 px-4 rounded">
-              Select Options
+              Add to Basket
             </button>
             <div className=" flex items-center text-3xl text-[#252B42] gap-3">
               <i className="bx bx-heart border border-1 rounded-full "></i>
