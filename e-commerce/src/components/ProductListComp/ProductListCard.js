@@ -1,35 +1,26 @@
+import { useSelector } from "react-redux";
+
 const ProductListCard = () => {
-  const ProductData = [
-    { image: "./img/productcard/img1.png" },
-    { image: "./img/productcard/img2.png" },
-    { image: "./img/productcard/img3.png" },
-    { image: "./img/productcard/img4.png" },
-    { image: "./img/productcard/img5.png" },
-    { image: "./img/productcard/img6.png" },
-    { image: "./img/productcard/img7.png" },
-    { image: "./img/productcard/img8.png" },
-    { image: "./img/productcard/img9.png" },
-    { image: "./img/productcard/img10.png" },
-    { image: "./img/productcard/img11.png" },
-    { image: "./img/productcard/img12.png" },
-  ];
+  const products = useSelector((state) => state.product.productList.products);
 
   return (
     <div className="font-['montserrat']">
-      <div className="flex flex-wrap justify-center gap-20 my-8  font-['montserrat']">
-        {ProductData.map((item, index) => (
+      <div className="flex flex-wrap justify-center gap-16 my-8  font-['montserrat']">
+        {products.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col  text-center lg:w-[15rem] sm:w-full sm:mx-8 mb-8 shadow-lg hover:shadow-slate-800 "
+            className="flex flex-col text-center lg:w-[15rem] sm:w-full lg:mx-0 sm:mx-8 mb-8 shadow-lg hover:shadow-slate-800 "
           >
-            <img className="lg:w-[15rem] lg:h-[15rem] sm:w-full sm:h-full" src={item.image} alt="" />
-            <h5 className="text-[#252B42]  font-bold">Graphic Design</h5>
-            <a className="text-[#737373] text-sm font-bold py-2" href="#">
-              English Department
-            </a>
-            <h5 className="text-[#BDBDBD] font-bold">
-              $16.48 <span className="text-[#23856D] font-bold ">$6.48</span>
-            </h5>
+            <img
+              className="lg:w-[15rem] lg:h-[15rem] sm:w-full sm:h-full"
+              src={item?.images?.[0]?.url}
+              alt=""
+            />
+            <h5 className="text-[#252B42]  font-bold">{item.name}</h5>
+            <div className="text-[#737373] text-sm font-bold py-2" href="#">
+              {item.description}
+            </div>
+            <h5 className="text-[#23856D] font-bold">${item.price} </h5>
             <div className="flex text-center justify-center py-2">
               <button class="w-4 h-4 bg-[#23A6F0] rounded-full mr-2"></button>
               <button class="w-4 h-4 bg-[#23856D] rounded-full mr-2"></button>
