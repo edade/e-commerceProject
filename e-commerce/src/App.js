@@ -17,6 +17,7 @@ import LoginPage from "./pages/LoginPage";
 import { userChange, userLogout } from "./store/actions/userAction";
 import { AxiosInstance } from "./api/api";
 import gravatar from "gravatar";
+import { fetchProducts } from "./store/thunk/fetchProducts";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchRoles());
     dispatch(fetchCategories());
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   const verifyHandler = async () => {
