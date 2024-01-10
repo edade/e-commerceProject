@@ -15,7 +15,7 @@ const productInitial = {
 export const ProductReducer = (state = productInitial, action) => {
   switch (action.type) {
     case "SET_PRODUCTS":
-      return { ...state, productList: action.payload };
+      return { ...state, productList: action.payload.products };
     default:
       return state;
   }
