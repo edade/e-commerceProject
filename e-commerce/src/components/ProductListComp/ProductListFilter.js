@@ -8,6 +8,8 @@ const ProductListFilter = ({
   searchTerm,
   onSortChange,
   sortType,
+  onCategoryChange,
+  categoryType,
 }) => {
   const handleGridClick = () => {
     setViewType("grid");
@@ -70,10 +72,10 @@ const ProductListFilter = ({
               name="filter"
               id="filter"
             >
-              <option value="Best">Best To Worst</option>
-              <option value="Worst">Worst To Best</option>
-              <option value="Highest">Highest Price</option>
-              <option value="Lowest">Lowest Price</option>
+              <option value="rating:desc">Best To Worst</option>
+              <option value="rating:asc">Worst To Best</option>
+              <option value="price:desc">Highest Price</option>
+              <option value="price:asc">Lowest Price</option>
             </select>
           </div>
           <button className="text-white bg-[#23A6F0] py-2 px-8 rounded">

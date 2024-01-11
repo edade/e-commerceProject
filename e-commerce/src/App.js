@@ -26,7 +26,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchRoles());
     dispatch(fetchCategories());
-    dispatch(fetchProducts());
+    dispatch(fetchProducts(1, "", "price:asc"));
   }, [dispatch]);
 
   const verifyHandler = async () => {
