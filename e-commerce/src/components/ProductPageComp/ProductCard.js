@@ -43,7 +43,7 @@ const ProductCard = (data) => {
                   src={image.url}
                   alt={`image ${index + 1}`}
                   onClick={ImageHandler}
-                  className={`w-full lg:h-45 object-contain ${
+                  className={`w-full lg:h-[500px] object-contain ${
                     activeIndex === index ? "filter-none" : "filter-grayscale"
                   }`}
                 />
@@ -56,12 +56,13 @@ const ProductCard = (data) => {
                 src={img.url}
                 className="opacity-50 w-24 h-[75px]"
                 onClick={ImageHandler}
+                key={i}
               ></img>
             ))}
           </div>
         </div>
 
-        <div className=" flex flex-1 flex-col text-start gap-5 mx-20">
+        <div className=" flex flex-1 flex-col text-start gap-3 mx-20">
           <h4 className="text-xl font-bold text-[#252B42]">{product?.name}</h4>
           <div className="flex flex-row items-center gap-2">
             <i className="bx bxs-star text-[#F3CD03] "></i>
@@ -72,7 +73,7 @@ const ProductCard = (data) => {
             <p> 10 reviews</p>
           </div>
           <h5 className="text-2xl font-bold text-[#252B42] ">
-            {product?.price}
+            ${product?.price}
           </h5>
           <div className="flex flex-row gap-2">
             <h6>Availability :</h6>

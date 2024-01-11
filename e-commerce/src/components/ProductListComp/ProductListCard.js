@@ -1,12 +1,17 @@
 import { useSelector } from "react-redux";
+import React from "react";
 import { Link } from "react-router-dom";
 
-const ProductListCard = () => {
+const ProductListCard = ({ viewType }) => {
   const products = useSelector((state) => state.product.productList);
 
   return (
     <div className="font-['montserrat']">
-      <div className="flex flex-wrap justify-center gap-16 my-8  font-['montserrat']">
+      <div
+        className={`flex flex-wrap justify-center gap-16 my-8 font-['montserrat'] ${
+          viewType === "grid" ? "flex-row" : "flex-col"
+        }`}
+      >
         {products.map((item, index) => (
           <Link
             className="no-underline"
@@ -15,7 +20,13 @@ const ProductListCard = () => {
               .replaceAll(" ", "-")}`}
             key={item.id}
           >
-            <div className="flex flex-col text-center lg:w-[15rem] sm:w-full lg:mx-0 sm:mx-8 mb-8 shadow-lg hover:shadow-slate-800 ">
+            <div
+              className={`flex ${
+                viewType === "grid"
+                  ? "flex-col text-center lg:w-[15rem] sm:w-full lg:mx-0 sm:mx-8 mb-8 shadow-lg hover:shadow-slate-800"
+                  : "flex-row space-between gap-4"
+              } `}
+            >
               <img
                 className="lg:w-[15rem] lg:h-[15rem] sm:w-full sm:h-full"
                 src={item?.images?.[0]?.url}

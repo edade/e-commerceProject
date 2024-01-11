@@ -1,4 +1,21 @@
-const ProductListFilter = () => {
+import { useState } from "react";
+import Form from "react-bootstrap/Form";
+
+const ProductListFilter = ({ onViewChange, onFilterChange, setViewType }) => {
+  const handleGridClick = () => {
+    setViewType("grid");
+    if (onViewChange) {
+      onViewChange("grid");
+    }
+  };
+
+  const handleColumnClick = () => {
+    setViewType("column");
+    if (onViewChange) {
+      onViewChange("column");
+    }
+  };
+
   return (
     <div className=" w-full font-['montserrat'] my-4 sm:py-4 ">
       <div className="flex lg:flex-row sm:flex-col sm:py-4 sm:h-28 justify-around container mx-auto p-4 h-12 items-center text-[#737373]">
@@ -7,14 +24,20 @@ const ProductListFilter = () => {
         </div>
         <div className="flex items-center font-normal text-sm gap-3 sm:py-4">
           <p>Wiews:</p>
-          <button class="flex items-center justify-center w-9 h-9 border rounded-md hover:bg-[#737373] transition-colors duration-300">
+          <button
+            onClick={handleGridClick}
+            className="flex items-center justify-center w-9 h-9 border rounded-md hover:bg-[#737373] transition-colors duration-300"
+          >
             <img
               className="h-[1.2rem] w-[1.2rem] px-1"
               src="./img/productlistfilterbutton1.png"
               alt=""
             />
           </button>
-          <button class="flex items-center justify-center w-9 h-9 border rounded-md hover:bg-[#737373] transition-colors duration-300">
+          <button
+            onClick={handleColumnClick}
+            className="flex items-center justify-center w-9 h-9 border rounded-md hover:bg-[#737373] transition-colors duration-300"
+          >
             <img
               className="h-[1.2rem] w-[1.2rem] px-1"
               src="./img/prodcuctlistfilterbutton2.png"
@@ -23,6 +46,22 @@ const ProductListFilter = () => {
           </button>
         </div>
         <div className="flex flex-row gap-2 sm:pb-4">
+          <div class="input-group">
+            <input
+              type="search"
+              class="form-control rounded"
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="search-addon"
+            />
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              data-mdb-ripple-init
+            >
+              search
+            </button>
+          </div>
           <div className=" flex flex-row font-normal text-sm border-light border-[#737373] rounded-md">
             <select name="filter" id="filter">
               <option value="Popularity">Popularity</option>
