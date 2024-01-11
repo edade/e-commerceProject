@@ -2,16 +2,7 @@ import { useSelector } from "react-redux";
 
 const BestSellerProductCard = () => {
   const products = useSelector((state) => state.product.productList);
-  const BestSellerProductCardData = [
-    { image: "./img/productPage/image2.png" },
-    { image: "./img/productPage/image3.png" },
-    { image: "./img/productPage/image4.png" },
-    { image: "./img/productPage/image5.png" },
-    { image: "./img/productPage/image6.png" },
-    { image: "./img/productPage/image7.png" },
-    { image: "./img/productPage/image8.png" },
-    { image: "./img/productPage/image9.png" },
-  ];
+
   return (
     <div className="bg-[#FAFAFA]  font-['montserrat']">
       <h3 className="flex lg:ml-28 lg:text-left text-[#252B42] font-bold text-2xl py-4 lg:justify-start sm:justify-center sm:ml-0 ">

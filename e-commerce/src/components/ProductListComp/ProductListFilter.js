@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 
-const ProductListFilter = ({ onViewChange, onFilterChange, setViewType }) => {
+const ProductListFilter = ({
+  onViewChange,
+  onFilterChange,
+  setViewType,
+  searchTerm,
+}) => {
   const handleGridClick = () => {
     setViewType("grid");
     if (onViewChange) {
@@ -53,14 +58,9 @@ const ProductListFilter = ({ onViewChange, onFilterChange, setViewType }) => {
               placeholder="Search"
               aria-label="Search"
               aria-describedby="search-addon"
+              value={searchTerm}
+              onChange={(e) => onFilterChange(e.target.value)}
             />
-            <button
-              type="button"
-              class="btn btn-outline-primary"
-              data-mdb-ripple-init
-            >
-              search
-            </button>
           </div>
           <div className=" flex flex-row font-normal text-sm border-light border-[#737373] rounded-md">
             <select name="filter" id="filter">

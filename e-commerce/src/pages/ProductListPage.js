@@ -9,13 +9,14 @@ import { useState } from "react";
 
 const ProductListPage = () => {
   const [viewType, setViewType] = useState("grid");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleViewChange = (type) => {
     setViewType(type);
   };
 
-  const handleFilterChange = (event) => {
-    console.log("Selected Filter:", event.target.value);
+  const handleFilterChange = (search) => {
+    setSearchTerm(search);
   };
 
   return (
@@ -27,8 +28,9 @@ const ProductListPage = () => {
         onViewChange={handleViewChange}
         onFilterChange={handleFilterChange}
         setViewType={setViewType}
+        searchTerm={searchTerm}
       />
-      <ProductListCard viewType={viewType} />
+      <ProductListCard viewType={viewType} searchTerm={searchTerm} />
       <Brand />
       <Footer />
     </div>

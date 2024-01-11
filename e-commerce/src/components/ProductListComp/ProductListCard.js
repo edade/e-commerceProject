@@ -1,9 +1,17 @@
 import { useSelector } from "react-redux";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const ProductListCard = ({ viewType }) => {
-  const products = useSelector((state) => state.product.productList);
+const ProductListCard = ({ viewType, searchTerm }) => {
+  let products = useSelector((state) => state.product.productList);
+  if (searchTerm && products.length > 0) {
+    products = products.filter((p) => {
+      return (
+        p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.description.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    });
+  }
 
   return (
     <div className="font-['montserrat']">
