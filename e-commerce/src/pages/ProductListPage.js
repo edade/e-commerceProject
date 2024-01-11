@@ -10,6 +10,7 @@ import { useState } from "react";
 const ProductListPage = () => {
   const [viewType, setViewType] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortType, setSortType] = useState("");
 
   const handleViewChange = (type) => {
     setViewType(type);
@@ -17,6 +18,10 @@ const ProductListPage = () => {
 
   const handleFilterChange = (search) => {
     setSearchTerm(search);
+  };
+
+  const handleSortChange = (sort) => {
+    setSortType(sort);
   };
 
   return (
@@ -27,10 +32,16 @@ const ProductListPage = () => {
       <ProductListFilter
         onViewChange={handleViewChange}
         onFilterChange={handleFilterChange}
+        onSortChange={handleSortChange}
+        sortType={sortType}
         setViewType={setViewType}
         searchTerm={searchTerm}
       />
-      <ProductListCard viewType={viewType} searchTerm={searchTerm} />
+      <ProductListCard
+        viewType={viewType}
+        searchTerm={searchTerm}
+        sortType={sortType}
+      />
       <Brand />
       <Footer />
     </div>

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const ProductListCard = ({ viewType, searchTerm }) => {
+const ProductListCard = ({ viewType, searchTerm, sortType }) => {
   let products = useSelector((state) => state.product.productList);
   if (searchTerm && products.length > 0) {
     products = products.filter((p) => {
@@ -11,6 +11,16 @@ const ProductListCard = ({ viewType, searchTerm }) => {
         p.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
+  }
+
+  if (sortType === "Lowest") {
+    products = products.sort((a, b) => a.price - b.price);
+  } else if (sortType === "Highest") {
+    products = products.sort((a, b) => b.price - a.price);
+  } else if (sortType === "Best") {
+    products = products.sort((a, b) => b.rating - a.rating);
+  } else if (sortType === "Worst") {
+    products = products.sort((a, b) => a.rating - b.rating);
   }
 
   return (

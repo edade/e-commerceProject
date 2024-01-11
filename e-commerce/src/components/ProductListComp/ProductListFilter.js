@@ -6,6 +6,8 @@ const ProductListFilter = ({
   onFilterChange,
   setViewType,
   searchTerm,
+  onSortChange,
+  sortType,
 }) => {
   const handleGridClick = () => {
     setViewType("grid");
@@ -63,10 +65,15 @@ const ProductListFilter = ({
             />
           </div>
           <div className=" flex flex-row font-normal text-sm border-light border-[#737373] rounded-md">
-            <select name="filter" id="filter">
-              <option value="Popularity">Popularity</option>
-              <option value="Most Popular">Most Popular</option>
-              <option value="Best Seller">Best Seller</option>
+            <select
+              onChange={(e) => onSortChange(e.target.value)}
+              name="filter"
+              id="filter"
+            >
+              <option value="Best">Best To Worst</option>
+              <option value="Worst">Worst To Best</option>
+              <option value="Highest">Highest Price</option>
+              <option value="Lowest">Lowest Price</option>
             </select>
           </div>
           <button className="text-white bg-[#23A6F0] py-2 px-8 rounded">
