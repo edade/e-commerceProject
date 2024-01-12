@@ -35,13 +35,14 @@ const ProductListPage = () => {
   };
 
   const handleCategoryChange = (category) => {
-    setCategoryType(category);
-    dispatch(fetchProducts(category, searchTerm, sortType));
-    setQueryString();
+    setCategoryType(category.id);
+    dispatch(fetchProducts(category.id, searchTerm, sortType));
+    setQueryString(category);
   };
 
-  const setQueryString = () => {
-    let url = `?category=${categoryType}&sort=${sortType}&filter=${searchTerm}`;
+  const setQueryString = (category) => {
+    const genderPrefix = category.code.charAt(0) === "e" ? "erkek" : "kadin";
+    let url = `${genderPrefix}/${category.title}&filter=${searchTerm}&sort=${sortType}`;
 
     history.push({ search: url });
   };
