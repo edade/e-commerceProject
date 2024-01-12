@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const ProductListCard = ({ viewType, searchTerm, sortType, categoryType }) => {
   let products = useSelector((state) => state.product.productList);
+
   // if (searchTerm && products.length > 0) {
   //   products = products.filter((p) => {
   //     return (

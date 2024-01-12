@@ -7,7 +7,7 @@ import ProductListFilter from "../components/ProductListComp/ProductListFilter";
 import ProductListCard from "../components/ProductListComp/ProductListCard";
 import { useState } from "react";
 import { fetchProducts } from "../store/thunk/fetchProducts";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const ProductListPage = () => {
@@ -17,6 +17,7 @@ const ProductListPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortType, setSortType] = useState("price:asc");
   const [categoryType, setCategoryType] = useState(1);
+  const loading = useSelector((state) => state.product.loading);
 
   const handleViewChange = (type) => {
     setViewType(type);
@@ -25,26 +26,29 @@ const ProductListPage = () => {
   const handleFilterChange = (search) => {
     setSearchTerm(search);
     dispatch(fetchProducts(categoryType, search, sortType));
-    setQueryString();
+    setQueryString(search);
   };
 
   const handleSortChange = (sort) => {
     setSortType(sort);
     dispatch(fetchProducts(categoryType, searchTerm, sort));
-    setQueryString();
+    setQueryString(sort);
   };
 
   const handleCategoryChange = (category) => {
     setCategoryType(category.id);
     dispatch(fetchProducts(category.id, searchTerm, sortType));
-    setQueryString(category);
+    setQueryString(category, category.title);
   };
 
   const setQueryString = (category) => {
-    const genderPrefix = category.code.charAt(0) === "e" ? "erkek" : "kadin";
-    let url = `${genderPrefix}/${category.title}&filter=${searchTerm}&sort=${sortType}`;
-
-    history.push({ search: url });
+    if (category && category.code) {
+      const genderPrefix = category.code.charAt(0) === "e" ? "erkek" : "kadin";
+      let url = `${genderPrefix}/${category.title}&filter=${searchTerm}&sort=${sortType}`;
+      history.push({ search: url });
+    } else {
+      console.error("Invalid category or category code.");
+    }
   };
 
   return (
@@ -62,12 +66,16 @@ const ProductListPage = () => {
         categoryType={categoryType}
         onCategoryChange={handleCategoryChange}
       />
-      <ProductListCard
-        viewType={viewType}
-        searchTerm={searchTerm}
-        sortType={sortType}
-        categoryType={categoryType}
-      />
+      {loading ? (
+        "loading..."
+      ) : (
+        <ProductListCard
+          viewType={viewType}
+          searchTerm={searchTerm}
+          sortType={sortType}
+          categoryType={categoryType}
+        />
+      )}
       <Brand />
       <Footer />
     </div>
