@@ -13,10 +13,10 @@ const BestSellerProductCard = () => {
         {products.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col  text-center lg:w-[15rem] sm:w-full  mb-8 shadow-lg hover:shadow-slate-800 "
+            className="flex flex-col  text-center lg:w-[15rem] sm:w-full  mb-8 shadow-lg hover:shadow-slate-800 gap-3 "
           >
             <img
-              className="lg:w-[15rem] lg:h-[15rem] sm:w-full sm:px-8 "
+              className="lg:w-full lg:h-full sm:w-full lg:px-0 sm:px-8 "
               src={item?.images?.[0]?.url}
               alt=""
             />

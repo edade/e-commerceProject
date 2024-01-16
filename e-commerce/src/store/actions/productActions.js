@@ -29,3 +29,8 @@ export const setFetchState = (fetchState) => ({
   type: "SET_FETCH_STATE",
   payload: fetchState,
 });
+
+export const nextPage = (data) => ({
+  type: "FETCH_MORE",
+  payload: data,
+});

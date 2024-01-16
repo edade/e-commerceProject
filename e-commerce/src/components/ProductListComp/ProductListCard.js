@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const ProductListCard = ({ viewType, searchTerm, sortType, categoryType }) => {
+const ProductListCard = ({ viewType }) => {
   let products = useSelector((state) => state.product.productList);
 
   // if (searchTerm && products.length > 0) {
@@ -46,12 +46,12 @@ const ProductListCard = ({ viewType, searchTerm, sortType, categoryType }) => {
             <div
               className={`flex ${
                 viewType === "grid"
-                  ? "flex-col text-center lg:w-[15rem] sm:w-full lg:mx-0 sm:mx-8 mb-8 shadow-lg hover:shadow-slate-800"
+                  ? "flex-col text-center lg:w-[15rem] sm:w-full lg:mx-0 sm:mx-8 mb-8 shadow-lg hover:shadow-slate-800 gap-3"
                   : "flex-row space-between gap-4"
               } `}
             >
               <img
-                className="lg:w-[15rem] lg:h-[15rem] sm:w-full sm:h-full"
+                className="lg:w-full lg:h-full sm:w-full sm:h-full "
                 src={item?.images?.[0]?.url}
                 alt=""
               />

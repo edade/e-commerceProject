@@ -25,6 +25,17 @@ const ProductListFilter = ({
     }
   };
 
+  const handleFilterClick = () => {
+    // "Filter" butonuna basıldığında onSortChange ve onFilterChange fonksiyonlarını çağır
+    if (onFilterChange) {
+      onFilterChange(searchTerm);
+    }
+    if (onSortChange) {
+      onSortChange(sortType);
+    }
+    // İhtiyaç duyarsanız onCategoryChange'i de çağırabilirsiniz.
+  };
+
   return (
     <div className=" w-full font-['montserrat'] my-4 sm:py-4 ">
       <div className="flex lg:flex-row sm:flex-col sm:py-4 sm:h-28 justify-around container mx-auto p-4 h-12 items-center text-[#737373]">
@@ -78,7 +89,10 @@ const ProductListFilter = ({
               <option value="price:asc">Lowest Price</option>
             </select>
           </div>
-          <button className="text-white bg-[#23A6F0] py-2 px-8 rounded">
+          <button
+            onClick={handleFilterClick}
+            className="text-white bg-[#23A6F0] py-2 px-8 rounded"
+          >
             Filter
           </button>
         </div>

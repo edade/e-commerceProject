@@ -8,7 +8,9 @@ import ProductListCard from "../components/ProductListComp/ProductListCard";
 import { useState } from "react";
 import { fetchProducts } from "../store/thunk/fetchProducts";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchNextPage } from "../store/thunk/fetchNextPage";
 
 const ProductListPage = () => {
   const dispatch = useDispatch();
@@ -18,6 +20,8 @@ const ProductListPage = () => {
   const [sortType, setSortType] = useState("price:asc");
   const [categoryType, setCategoryType] = useState(1);
   const loading = useSelector((state) => state.product.loading);
+  const [hasMore, setHasMore] = useState(true);
+  const { productList } = useSelector((state) => state.product);
 
   const handleViewChange = (type) => {
     setViewType(type);
@@ -39,6 +43,16 @@ const ProductListPage = () => {
     setCategoryType(category.id);
     dispatch(fetchProducts(category.id, searchTerm, sortType));
     setQueryString(category, category.title);
+  };
+
+  const fetchData = (data) => {
+    dispatch(fetchNextPage(data))
+      .then(() => {
+        setHasMore(true);
+      })
+      .catch((error) => {
+        setHasMore(false);
+      });
   };
 
   const setQueryString = (category) => {
@@ -69,12 +83,26 @@ const ProductListPage = () => {
       {loading ? (
         "loading..."
       ) : (
-        <ProductListCard
-          viewType={viewType}
-          searchTerm={searchTerm}
-          sortType={sortType}
-          categoryType={categoryType}
-        />
+        <InfiniteScroll
+          dataLength={productList.length}
+          next={() =>
+            fetchData({
+              categoryType,
+              searchTerm,
+              sortType,
+              offset: 25,
+            })
+          }
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          <ProductListCard viewType={viewType} />
+        </InfiniteScroll>
       )}
       <Brand />
       <Footer />
