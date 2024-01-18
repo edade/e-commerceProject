@@ -2,14 +2,14 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 
 const ProductListFilter = ({
-  onViewChange,
-  onFilterChange,
   setViewType,
   searchTerm,
-  onSortChange,
-  sortType,
-  onCategoryChange,
+  setSearchTerm,
+  setCategoryType,
   categoryType,
+  sortType,
+  setSortType,
+  onViewChange,
 }) => {
   const handleGridClick = () => {
     setViewType("grid");
@@ -25,14 +25,14 @@ const ProductListFilter = ({
     }
   };
 
-  const handleFilterClick = () => {
-    if (onFilterChange) {
-      onFilterChange(searchTerm);
-    }
-    if (onSortChange) {
-      onSortChange(sortType);
-    }
-  };
+  // const handleFilterClick = () => {
+  //   if (onFilterChange) {
+  //     onFilterChange(searchTerm);
+  //   }
+  //   if (onSortChange) {
+  //     onSortChange(sortType);
+  //   }
+  // };
 
   return (
     <div className=" w-full font-['montserrat'] my-4 sm:py-4 ">
@@ -72,12 +72,13 @@ const ProductListFilter = ({
               aria-label="Search"
               aria-describedby="search-addon"
               value={searchTerm}
-              onChange={(e) => onFilterChange(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <div className=" flex flex-row font-normal text-sm border-light border-[#737373] rounded-md">
             <select
-              onChange={(e) => onSortChange(e.target.value)}
+              value={sortType}
+              onChange={(e) => setSortType(e.target.value)}
               name="filter"
               id="filter"
             >
@@ -87,10 +88,7 @@ const ProductListFilter = ({
               <option value="price:asc">Lowest Price</option>
             </select>
           </div>
-          <button
-            onClick={handleFilterClick}
-            className="text-white bg-[#23A6F0] py-2 px-8 rounded"
-          >
+          <button className="text-white bg-[#23A6F0] py-2 px-8 rounded">
             Filter
           </button>
         </div>

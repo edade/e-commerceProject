@@ -1,11 +1,6 @@
 import { useSelector } from "react-redux";
 
 const CategoryCard = ({ onCategoryChange }) => {
-  const handleCategoryChange = (category) => {
-    if (onCategoryChange) {
-      onCategoryChange(category);
-    }
-  };
   const categories = useSelector((state) => state.global.categories);
   const sortedCategories = categories.sort((a, b) => b.rating - a.rating);
   const top5Categories = sortedCategories.slice(0, 5);

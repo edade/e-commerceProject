@@ -5,12 +5,14 @@ import Header from "../layout/Header";
 import CategoryCard from "../components/ProductListComp/CategoryCard";
 import ProductListFilter from "../components/ProductListComp/ProductListFilter";
 import ProductListCard from "../components/ProductListComp/ProductListCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchProducts } from "../store/thunk/fetchProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchNextPage } from "../store/thunk/fetchNextPage";
+import { fetchCategories } from "../store/thunk/fetchCategories";
+import { setQueryString } from "../store/utils";
 
 const ProductListPage = () => {
   const dispatch = useDispatch();
@@ -19,51 +21,95 @@ const ProductListPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortType, setSortType] = useState("price:asc");
   const [categoryType, setCategoryType] = useState(1);
-  const loading = useSelector((state) => state.product.loading);
   const [hasMore, setHasMore] = useState(true);
-  const { productList } = useSelector((state) => state.product);
+  const [isLoading, setIsLoading] = useState(false);
+  //const { productList } = useSelector((state) => state.product)
+
+  const { productList, totalProductCount } = useSelector(
+    (state) => state.product
+  );
+
+  const fetchData = (data) => {
+    setIsLoading(true);
+    dispatch(fetchNextPage(data))
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching next page:", error);
+        setIsLoading(false);
+        setHasMore(false);
+      });
+  };
+
+  useEffect(() => {
+    const fetchProductsAndUpdateUrl = async () => {
+      setIsLoading(true);
+      dispatch(
+        fetchProducts({
+          category: categoryType,
+          filter: searchTerm,
+          sort: sortType,
+        })
+      )
+        .then(() => {
+          setQueryString(history, categoryType, searchTerm, sortType);
+        })
+        .finally(() => setIsLoading(false))
+        .catch((error) => {
+          console.error("Error fetching products:", error);
+          setHasMore(false);
+        });
+    };
+
+    fetchProductsAndUpdateUrl();
+  }, [categoryType, searchTerm, sortType, history, dispatch]);
 
   const handleViewChange = (type) => {
     setViewType(type);
   };
 
-  const handleFilterChange = (search) => {
-    setSearchTerm(search);
-    dispatch(fetchProducts(categoryType, search, sortType));
-    setQueryString(search);
-  };
-
-  const handleSortChange = (sort) => {
-    setSortType(sort);
-    dispatch(fetchProducts(categoryType, searchTerm, sort));
-    setQueryString(sort);
-  };
-
   const handleCategoryChange = (category) => {
     setCategoryType(category.id);
     dispatch(fetchProducts(category.id, searchTerm, sortType));
-    setQueryString(category, category.title);
   };
+  // const handleFilterChange = (search) => {
+  //   setSearchTerm(search);
+  //   dispatch(fetchProducts(categoryType, search, sortType));
+  //   setQueryString(search);
+  // };
 
-  const fetchData = (data) => {
-    dispatch(fetchNextPage(data))
-      .then(() => {
-        setHasMore(true);
-      })
-      .catch((error) => {
-        setHasMore(false);
-      });
-  };
+  // const handleSortChange = (sort) => {
+  //   setSortType(sort);
+  //   dispatch(fetchProducts(categoryType, searchTerm, sort));
+  //   setQueryString(sort);
+  // };
 
-  const setQueryString = (category) => {
-    if (category && category.code) {
-      const genderPrefix = category.code.charAt(0) === "e" ? "erkek" : "kadin";
-      let url = `${genderPrefix}/${category.title}&filter=${searchTerm}&sort=${sortType}`;
-      history.push({ search: url });
-    } else {
-      console.error("Invalid category or category code.");
-    }
-  };
+  // const handleCategoryChange = (category) => {
+  //   setCategoryType(category.id);
+  //   dispatch(fetchProducts(category.id, searchTerm, sortType));
+  //   setQueryString(category, category.title);
+  // };
+
+  // const fetchData = (data) => {
+  //   dispatch(fetchNextPage(data))
+  //     .then(() => {
+  //       setHasMore(true);
+  //     })
+  //     .catch((error) => {
+  //       setHasMore(false);
+  //     });
+  // };
+
+  // const setQueryString = (category) => {
+  //   if (category && category.code) {
+  //     const genderPrefix = category.code.charAt(0) === "e" ? "erkek" : "kadin";
+  //     let url = `${genderPrefix}/${category.title}&filter=${searchTerm}&sort=${sortType}`;
+  //     history.push({ search: url });
+  //   } else {
+  //     console.error("Invalid category or category code.");
+  //   }
+  // };
 
   return (
     <div>
@@ -71,16 +117,15 @@ const ProductListPage = () => {
       <ShopContainer />
       <CategoryCard onCategoryChange={handleCategoryChange} />
       <ProductListFilter
-        onViewChange={handleViewChange}
-        onFilterChange={handleFilterChange}
-        onSortChange={handleSortChange}
         sortType={sortType}
+        setSortType={setSortType}
         setViewType={setViewType}
         searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
         categoryType={categoryType}
-        onCategoryChange={handleCategoryChange}
+        setCategoryType={setCategoryType}
       />
-      {loading ? (
+      {isLoading ? (
         <div class="flex items-center justify-center">
           <svg
             aria-hidden="true"
@@ -112,7 +157,6 @@ const ProductListPage = () => {
             })
           }
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: "center" }}>
               <b>Yay! You have seen it all</b>

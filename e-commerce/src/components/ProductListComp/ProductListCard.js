@@ -41,7 +41,7 @@ const ProductListCard = ({ viewType }) => {
             to={`/product/${item.id}/${item.name
               .toLowerCase()
               .replaceAll(" ", "-")}`}
-            key={item.id}
+            key={index}
           >
             <div
               className={`flex ${

@@ -1,36 +1,19 @@
-export const FETCH_STATES = {
-  notFetched: "NOT_FETCHED",
-  fetching: "FETCHING",
-  fethced: "FETCHED",
-  failed: "FAILED",
-};
-
-export const setProductList = (productList) => ({
-  type: "SET_PRODUCTS",
-  payload: productList,
+export const setFetching = (data) => ({
+  type: "FETCHING",
+  payload: data,
 });
 
-export const setTotalProductCount = (count) => ({
-  type: "SET_TOTAL_PRODUCT_COUNT",
-  payload: count,
+export const setFetched = (data) => ({
+  type: "FETCHED",
+  payload: data,
 });
 
-export const setPageCount = (count) => ({
-  type: "SET_PAGE_COUNT",
-  payload: count,
+export const setFailed = (data) => ({
+  type: "FAILED",
+  payload: data,
 });
 
-export const setActivePage = (page) => ({
-  type: "SET_ACTIVE_PAGE",
-  payload: page,
-});
-
-export const setFetchState = (fetchState) => ({
-  type: "SET_FETCH_STATE",
-  payload: fetchState,
-});
-
-export const nextPage = (data) => ({
+export const fetchMore = (data) => ({
   type: "FETCH_MORE",
   payload: data,
 });

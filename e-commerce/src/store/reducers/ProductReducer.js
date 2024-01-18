@@ -1,40 +1,33 @@
-export const FETCH_STATES = {
-  notFetched: "NOT_FETCHED",
-  fetching: "FETHCING",
-  fetched: "FETCHED",
-  failed: "FAILED",
-};
-
-const productInitial = {
+const initialState = {
   productList: [],
   totalProductCount: 0,
-  pageCount: 1,
+  pageCount: 0,
   activePage: 1,
-  fetchState: FETCH_STATES.notFetched,
-  loading: false,
+  fetchState: "NOT_FETCHED",
 };
-export const ProductReducer = (state = productInitial, action) => {
+
+export const ProductReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_PRODUCTS":
+    case "FETCHING":
+      return { ...state, loading: true };
+
+    case "FETCHED":
       return {
         ...state,
+        totalProductCount: action.payload.total,
         productList: action.payload.products,
-        fetchState: FETCH_STATES.fetched,
-        loading: false,
+        fetchState: "FETCHED",
       };
 
-    case "SET_FETCH_STATE":
-      return {
-        ...state,
-        fetchState: action.payload,
-        loading: action.payload === FETCH_STATES.fetching,
-      };
+    case "FAILED":
+      return { ...state, loading: false, products: [], error: action.payload };
+
     case "FETCH_MORE":
       return {
         ...state,
         totalProductCount: action.payload.total,
         productList: [...state.productList, ...action.payload.products],
-        fetchState: "MORE",
+        fetchState: "sadas",
       };
 
     default:

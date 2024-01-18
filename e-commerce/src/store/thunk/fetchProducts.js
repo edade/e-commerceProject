@@ -1,26 +1,23 @@
 import { AxiosInstance } from "../../api/api";
-import { setFetchState, setProductList } from "../actions/productActions";
 
-export const FETCH_STATES = {
-  notFetched: "NOT_FETCHED",
-  fetching: "FETHCING",
-  fetched: "FETCHED",
-  failed: "FAILED",
-};
+import {
+  fetchMore,
+  setFailed,
+  setFetched,
+  setFetching,
+} from "../actions/productActions";
 
-export const fetchProducts = (category, filter, sort) => {
-  return async (dispatch) => {
-    try {
-      dispatch(setFetchState(FETCH_STATES.fetching));
-      const response = await AxiosInstance.get(
-        `/products?category=${category}&filter=${filter}&sort=${sort}`
-      );
+export const fetchProducts = (data) => async (dispatch) => {
+  try {
+    dispatch(setFetching());
 
-      dispatch(setProductList(response.data));
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    } finally {
-      dispatch(setFetchState(FETCH_STATES.fetched));
-    }
-  };
+    const response = await AxiosInstance.get("/products", {
+      params: data,
+    });
+
+    dispatch(setFetched(response.data));
+    console.log("products data :", response.data);
+  } catch (error) {
+    dispatch(setFailed(error.message));
+  }
 };

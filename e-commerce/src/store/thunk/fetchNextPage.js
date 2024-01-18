@@ -1,5 +1,5 @@
 import { AxiosInstance } from "../../api/api";
-import { nextPage } from "../actions/productActions";
+import { fetchMore } from "../actions/productActions";
 
 export const fetchNextPage = (data) => {
   return async (dispatch) => {
@@ -8,7 +8,7 @@ export const fetchNextPage = (data) => {
         params: data,
       });
 
-      dispatch(nextPage(response.data));
+      dispatch(fetchMore(response.data));
     } catch (error) {
       console.error("Error fetching products:", error);
     }
