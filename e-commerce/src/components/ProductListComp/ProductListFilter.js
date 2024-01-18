@@ -26,14 +26,12 @@ const ProductListFilter = ({
   };
 
   const handleFilterClick = () => {
-    // "Filter" butonuna basıldığında onSortChange ve onFilterChange fonksiyonlarını çağır
     if (onFilterChange) {
       onFilterChange(searchTerm);
     }
     if (onSortChange) {
       onSortChange(sortType);
     }
-    // İhtiyaç duyarsanız onCategoryChange'i de çağırabilirsiniz.
   };
 
   return (
