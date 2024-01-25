@@ -1,8 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../store/actions/shoppingCardAction";
 
 const CartDropdown = ({ onClose }) => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
+  const dispatch = useDispatch();
+
+  const handleRemoveFromCart = (productId) => {
+    dispatch(removeFromCart(productId));
+  };
 
   return (
     <div
@@ -44,48 +50,56 @@ const CartDropdown = ({ onClose }) => {
             </div>
             <div className="mt-8">
               <div className="flow-root">
-                <ul role="list" className="-my-6 divide-y divide-gray-200">
-                  {cartItems.map((item, index) => (
-                    <li key={index} className="flex py-6">
-                      <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                        <img
-                          src={item?.product?.images}
-                          alt={item?.product.id}
-                          className="h-full w-full object-cover object-center"
-                        />
-                      </div>
+                {" "}
+                {cartItems.length === 0 ? (
+                  <p>No products in basket</p>
+                ) : (
+                  <ul role="list" className="-my-6 divide-y divide-gray-200">
+                    {cartItems.map((item, index) => (
+                      <li key={index} className="flex py-6">
+                        <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                          <img
+                            src={item?.product?.images}
+                            alt={item?.product.id}
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
 
-                      <div className="ml-4 flex flex-1 flex-col">
-                        <div>
-                          <div className="flex justify-between text-base font-medium text-gray-900">
-                            <h3>
-                              <a href="#">{item?.product?.name}</a>
-                            </h3>
-                            <p className="ml-4 text-xl text-[#23856D]">
-                              ${item?.product?.price}
-                            </p>
+                        <div className="ml-4 flex flex-1 flex-col">
+                          <div>
+                            <div className="flex justify-between text-base font-medium text-gray-900">
+                              <h3>
+                                <a href="#">{item?.product?.name}</a>
+                              </h3>
+                              <p className="ml-4 text-xl text-[#23856D]">
+                                ${item.product.price * item.count}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex flex-1 items-end justify-between text-sm">
+                            <p className="text-gray-500">Adet: {item.count}</p>
+                            <div className="flex">
+                              <button
+                                type="button"
+                                className="font-medium text-[#737373] hover:text-[#9bc8e3]"
+                                onClick={() =>
+                                  handleRemoveFromCart(item.product.id)
+                                }
+                              >
+                                <i class="fa-solid fa-trash"></i>
+                              </button>
+                            </div>
                           </div>
                         </div>
-                        <div className="flex flex-1 items-end justify-between text-sm">
-                          <p className="text-gray-500">Adet: {item.count}</p>
-                          <div className="flex">
-                            <button
-                              type="button"
-                              className="font-medium text-[#737373] hover:text-indigo-500"
-                            >
-                              <i class="fa-solid fa-trash"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-between mx-3 mt-2 mb-2">
+        <div className="flex flex-row justify-between mx-3 mt-2 mb-2 gap-3">
           <button className="text-white bg-[#9bc8e3] py-3 px-4 rounded">
             Go to Shop Cart
           </button>
