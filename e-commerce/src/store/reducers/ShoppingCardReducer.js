@@ -1,8 +1,5 @@
 const ShoppingCardInitial = {
-  cart: [
-    { count: "", product: { id: "" } },
-    { count: "", product: { id: "" } },
-  ],
+  cart: [],
   payment: {},
   address: {},
 };
@@ -24,7 +21,12 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
       } else {
         const tempProduct = {
           count: 1,
-          product: { id: action.payload.id },
+          product: {
+            id: action.payload.id,
+            name: action.payload.name,
+            price: action.payload.price,
+            images: action.payload.images[0].url,
+          },
         };
         return { ...state, cart: [...state.cart, tempProduct] };
       }

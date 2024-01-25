@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { NavLink, Link, useLocation, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { renewAxiosInstance } from "../api/api";
+import CartDropdown from "../components/CartDropdown";
+
 const Header = () => {
   const location = useLocation();
   const history = useHistory();
@@ -17,8 +19,11 @@ const Header = () => {
   };
 
   const categories = useSelector((state) => state.global.categories);
+  const cartItems = useSelector((state) => state.shoppingCard.cart);
 
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [isShoppingCardDropdownVisible, setShoppingCardDropdownVisible] =
+    useState(false);
   const [selectedGender, setSelectedGender] = useState(null);
 
   const handleDropdownVisibility = (visible) => {
@@ -204,9 +209,15 @@ const Header = () => {
                   className="h-[1em] items-center"
                   src="./img/shop.png"
                   alt=""
+                  onClick={() =>
+                    setShoppingCardDropdownVisible(
+                      !isShoppingCardDropdownVisible
+                    )
+                  }
                 />
-                <p className="ml-1">3</p>
+                <p className="ml-1">{cartItems.length}</p>
               </div>
+              {isShoppingCardDropdownVisible && <CartDropdown />}
               <div className="flex items-center">
                 <img
                   className="h-[1em] items-center"
