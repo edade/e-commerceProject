@@ -1,9 +1,15 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { addToCart } from "../../store/actions/shoppingCardAction";
 
 const ProductListCard = ({ viewType }) => {
   let products = useSelector((state) => state.product.productList);
+  const dispatch = useDispatch();
+
+  const handleAddtoCard = (product) => {
+    dispatch(addToCart(product));
+  };
 
   // if (searchTerm && products.length > 0) {
   //   products = products.filter((p) => {
@@ -29,7 +35,7 @@ const ProductListCard = ({ viewType }) => {
   // }
 
   return (
-    <div className="font-['montserrat']">
+    <div className="font-['montserrat'] ">
       <div
         className={`flex flex-wrap justify-center gap-16 my-8 font-['montserrat'] ${
           viewType === "grid" ? "flex-row" : "flex-col"
@@ -66,6 +72,15 @@ const ProductListCard = ({ viewType }) => {
                 <button class="w-4 h-4 bg-[#E77C40] rounded-full mr-2"></button>
                 <button class="w-4 h-4 bg-[#23856D] rounded-full mr-2"></button>{" "}
               </div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleAddtoCard(item);
+                }}
+                className="text-white bg-[#23A6F0] py-3 px-4 rounded"
+              >
+                Add to Basket
+              </button>
             </div>
           </Link>
         ))}
