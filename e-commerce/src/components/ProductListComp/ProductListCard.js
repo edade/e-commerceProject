@@ -63,7 +63,10 @@ const ProductListCard = ({ viewType }) => {
                 alt=""
               />
               <h5 className="text-[#252B42]  font-bold">{item.name}</h5>
-              <div className="text-[#737373] text-sm font-bold py-2" href="#">
+              <div
+                className="text-[#737373] text-sm font-bold py-2 px-2"
+                href="#"
+              >
                 {item.description}
               </div>
               <h5 className="text-[#23856D] font-bold">${item.price} </h5>

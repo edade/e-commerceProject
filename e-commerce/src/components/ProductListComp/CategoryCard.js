@@ -9,16 +9,12 @@ const CategoryCard = ({ onCategoryChange }) => {
       {top5Categories.map((category, index) => (
         <a
           key={index}
-          className="lg:w-60 sm:w-full sm:px-8"
+          className="lg:w-60 sm:w-full lg:px-3 sm:px-8"
           onClick={() => onCategoryChange(category)}
         >
           <div className="relative shadow-xl hover:text-[#737373]">
-            <img
-              src={category.img}
-              alt=""
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-20 left-10 text-white">
+            <img src={category.img} alt="" className="w-70 h-80 object-cover" />
+            <div className="absolute top-36 left-12 text-white">
               <h6 className="text-2xl font-bold">{category.title}</h6>
               {/* <h2 className="text-xs font-semibold w-[94px] pt-1 h-[64px]">5 item</h2> */}
             </div>
