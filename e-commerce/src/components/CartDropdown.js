@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../store/actions/shoppingCardAction";
+import { Link } from "react-router-dom";
 
 const CartDropdown = ({ onClose }) => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
@@ -12,7 +13,7 @@ const CartDropdown = ({ onClose }) => {
 
   return (
     <div
-      className="absolute z-50 top-24 right-10 mt-2 bg-white rounded-lg shadow-md overflow-hidden"
+      className="absolute z-50 top-24 right-10 mt-2 bg-white rounded-lg shadow-md overflow-hidden font-['montserrat'] "
       aria-labelledby="slide-over-title"
       role="dialog"
       aria-modal="true"
@@ -100,9 +101,11 @@ const CartDropdown = ({ onClose }) => {
           </div>
         </div>
         <div className="flex flex-row justify-between mx-3 mt-2 mb-2 gap-3">
-          <button className="text-white bg-[#9bc8e3] py-3 px-4 rounded">
-            Go to Shop Cart
-          </button>
+          <Link to="/cart">
+            <button className="text-white bg-[#9bc8e3] py-3 px-4 rounded">
+              Go to Shop Cart
+            </button>
+          </Link>
           <button className="text-white bg-[#9bc8e3] py-3 px-4 rounded">
             Complete the Order
           </button>

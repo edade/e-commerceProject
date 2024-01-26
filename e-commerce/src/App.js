@@ -18,6 +18,7 @@ import { userChange, userLogout } from "./store/actions/userAction";
 import { AxiosInstance } from "./api/api";
 import gravatar from "gravatar";
 import { fetchProducts } from "./store/thunk/fetchProducts";
+import ShopCardPage from "./pages/ShopCardPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -81,6 +82,9 @@ function App() {
         </Route>
         <Route exact path="/about">
           <AboutPage />
+        </Route>
+        <Route exact path="/cart">
+          <ShopCardPage />
         </Route>
         <Route exact path="/blog">
           <TeamPage />

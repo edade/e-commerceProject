@@ -24,12 +24,31 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
           product: {
             id: action.payload.id,
             name: action.payload.name,
+            description: action.payload.description,
             price: action.payload.price,
             images: action.payload.images[0].url,
           },
         };
         return { ...state, cart: [...state.cart, tempProduct] };
       }
+    case "DECREASE_ITEM_COUNT":
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product.id === action.payload
+            ? { ...item, count: item.count - 1 } // Adet azaltma
+            : item
+        ),
+      };
+    case "INCREASE_ITEM_COUNT":
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product.id === action.payload
+            ? { ...item, count: item.count + 1 } // Adet artırma
+            : item
+        ),
+      };
     case "REMOVE_FROM_CART":
       return {
         ...state,

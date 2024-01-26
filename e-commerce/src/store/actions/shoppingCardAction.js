@@ -5,6 +5,20 @@ export const addToCart = (product) => {
   };
 };
 
+export const decreaseItemCount = (productId) => {
+  return {
+    type: "DECREASE_ITEM_COUNT",
+    payload: productId,
+  };
+};
+
+export const increaseItemCount = (productId) => {
+  return {
+    type: "INCREASE_ITEM_COUNT",
+    payload: productId,
+  };
+};
+
 export const removeFromCart = (productId) => {
   return {
     type: "REMOVE_FROM_CART",
