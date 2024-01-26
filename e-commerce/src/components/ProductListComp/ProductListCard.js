@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { addToCart } from "../../store/actions/shoppingCardAction";
+import { toast } from "react-toastify";
 
 const ProductListCard = ({ viewType }) => {
   let products = useSelector((state) => state.product.productList);
@@ -76,6 +77,7 @@ const ProductListCard = ({ viewType }) => {
                 onClick={(e) => {
                   e.preventDefault();
                   handleAddtoCard(item);
+                  toast("Product added to basket!");
                 }}
                 className="text-white bg-[#23A6F0] py-3 px-4 rounded"
               >
