@@ -3,6 +3,7 @@ import {
   decreaseItemCount,
   increaseItemCount,
   removeFromCart,
+  toggleCheckbox,
 } from "../store/actions/shoppingCardAction";
 import { useHistory } from "react-router-dom";
 import Header from "../layout/Header";
@@ -29,6 +30,20 @@ const ShopCardPage = () => {
     dispatch(increaseItemCount(productId));
   };
 
+  const handleToggleCheckbox = (productId) => {
+    dispatch(toggleCheckbox(productId));
+  };
+
+  const calculateTotalPrice = () => {
+    let totalPrice = 0;
+    cartItems.forEach((item) => {
+      if (item.isChecked) {
+        totalPrice += item.product.price * item.count;
+      }
+    });
+    return totalPrice.toFixed(2);
+  };
+
   return (
     <div className=" flex flex-col gap-5 justify-center items-center font-['montserrat'] font-semibold ">
       <Header />
@@ -45,6 +60,11 @@ const ShopCardPage = () => {
                 key={index}
                 className="  flex flex-row items-center justify-around px-4"
               >
+                <input
+                  type="checkbox"
+                  checked={item.isChecked}
+                  onChange={() => handleToggleCheckbox(item.product.id)}
+                />
                 <img
                   className="max-w-[130px] max-h-[130px] mr-2"
                   src={item?.product?.images}
@@ -81,15 +101,7 @@ const ShopCardPage = () => {
               </div>
             </div>
           ))}
-          <p>
-            Toplam: $
-            {cartItems
-              .reduce(
-                (total, item) => total + item?.product?.price * item.count,
-                0
-              )
-              .toFixed(2)}
-          </p>
+          <p>Toplam: ${calculateTotalPrice()}</p>
         </div>
       )}
     </div>

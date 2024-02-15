@@ -21,6 +21,7 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
       } else {
         const tempProduct = {
           count: 1,
+          isChecked: true,
           product: {
             id: action.payload.id,
             name: action.payload.name,
@@ -31,6 +32,15 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
         };
         return { ...state, cart: [...state.cart, tempProduct] };
       }
+    case "TOGGLE_CHECKBOX":
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product.id === action.payload
+            ? { ...item, isChecked: !item.isChecked }
+            : item
+        ),
+      };
     case "DECREASE_ITEM_COUNT":
       return {
         ...state,

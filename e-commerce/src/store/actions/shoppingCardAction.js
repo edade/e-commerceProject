@@ -5,6 +5,13 @@ export const addToCart = (product) => {
   };
 };
 
+export const toggleCheckbox = (productId) => {
+  return {
+    type: "TOGGLE_CHECKBOX",
+    payload: productId,
+  };
+};
+
 export const decreaseItemCount = (productId) => {
   return {
     type: "DECREASE_ITEM_COUNT",
