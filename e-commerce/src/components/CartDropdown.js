@@ -106,9 +106,11 @@ const CartDropdown = ({ onClose }) => {
               Go to Shop Cart
             </button>
           </Link>
-          <button className="text-white bg-[#9bc8e3] py-3 px-4 rounded">
-            Complete the Order
-          </button>
+          <Link to="/order">
+            <button className="text-white bg-[#9bc8e3] py-3 px-4 rounded">
+              Complete the Order
+            </button>
+          </Link>
         </div>
       </div>
     </div>
