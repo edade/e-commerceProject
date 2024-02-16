@@ -6,11 +6,11 @@ const userInitial = {
   role_id: null,
   loading: false,
   error: null,
+  addresses: [],
 };
 
 export const userReducer = (state = userInitial, action) => {
   switch (action.type) {
-
     case "USER_LOGIN_SUCCESS":
       localStorage.setItem("token", action.payload.token);
       return { ...state, ...action.payload, loading: false, error: null };
@@ -19,6 +19,16 @@ export const userReducer = (state = userInitial, action) => {
       return userInitial;
     case "USER_INITIAL_LOAD":
       return { ...state, loading: false };
+
+    case "USER_ADD_ADDRESS":
+      return {
+        ...state,
+        addresses: [...state.addresses, action.payload.address],
+      };
+    case "USER_UPDATE_ADDRESS":
+      return state;
+    case "USER_DELETE_ADDRESS":
+      return state;
     default:
       return state;
   }

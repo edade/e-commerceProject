@@ -19,6 +19,7 @@ import { AxiosInstance } from "./api/api";
 import gravatar from "gravatar";
 import { fetchProducts } from "./store/thunk/fetchProducts";
 import ShopCardPage from "./pages/ShopCardPage";
+import OrderPage from "./pages/OrderPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -97,6 +98,9 @@ function App() {
         </Route>
         <Route exact path="/login">
           <LoginPage />
+        </Route>
+        <Route exact path="/order">
+          <OrderPage />
         </Route>
       </Switch>
       <ToastContainer />
