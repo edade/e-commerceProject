@@ -67,7 +67,7 @@ const ShopCardPage = () => {
           ) : (
             <div className="w-11/12">
               {cartItems.map((item, index) => (
-                <div className="border-3 border-[#9bc8e3]-400 rounded-lg  h-2/5 mb-2 p-2">
+                <div className="border-3 border-[#9bc8e3]-400 rounded-lg mb-2 p-2">
                   <i class="fa-solid fa-cube"> Kargo Bedava</i>
                   <hr></hr> <br></br>
                   <div
