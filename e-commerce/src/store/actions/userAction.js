@@ -16,3 +16,7 @@ export const userInitialLoad = () => {
 export const userAddAddress = (address) => {
   return { type: "USER_ADD_ADDRESS", payload: { address } };
 };
+
+export const userGetAddress = (addressData) => {
+  return { type: "USER_GET_ADDRESS", payload: { addressData } };
+};

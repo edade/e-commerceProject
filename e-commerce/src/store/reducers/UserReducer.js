@@ -25,6 +25,12 @@ export const userReducer = (state = userInitial, action) => {
         ...state,
         addresses: [...state.addresses, action.payload.address],
       };
+
+    case "USER_GET_ADDRESS":
+      return {
+        ...state,
+        addresses: [...state.addresses, action.payload.addressData],
+      };
     case "USER_UPDATE_ADDRESS":
       return state;
     case "USER_DELETE_ADDRESS":
