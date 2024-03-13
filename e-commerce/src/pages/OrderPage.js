@@ -19,7 +19,7 @@ const OrderPage = () => {
     if (!userToken) {
       history.push("/login");
     } else {
-      dispatch(fetchUserAdress);
+      dispatch(fetchUserAdress());
     }
   }, [dispatch, history, userToken]);
 

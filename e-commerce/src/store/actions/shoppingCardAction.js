@@ -40,9 +40,9 @@ export const setPaymentInfo = (paymentInfo) => {
   };
 };
 
-export const setAddressInfo = (addressInfo) => {
+export const setAddressInfo = (address) => {
   return {
     type: "SET_ADDRESS_INFO",
-    payload: addressInfo,
+    payload: address,
   };
 };
