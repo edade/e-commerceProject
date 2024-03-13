@@ -20,6 +20,10 @@ export const fetchLogin = (formData, history) => {
         }),
       };
 
+      localStorage.setItem("token", userData.token);
+
+      renewAxiosInstance();
+
       dispatch(userChange(userData));
 
       toast.success("Congratulations! You've successfully logged in!");
