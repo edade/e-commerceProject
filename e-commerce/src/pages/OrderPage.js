@@ -18,6 +18,9 @@ const OrderPage = () => {
   const isLoading = useSelector((state) => state.user.loading);
   const [showBillingAddress, setShowBillingAddress] = useState(true);
   const [showAddressForm, setShowAddressForm] = useState(false);
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedCityDistricts, setSelectedCityDistricts] = useState([]);
 
   useEffect(() => {
     if (!userToken) {
@@ -53,6 +56,34 @@ const OrderPage = () => {
 
   const handleClose = () => setShowAddressForm(false);
   const handleShow = () => setShowAddressForm(true);
+
+  useEffect(() => {
+    fetch("https://turkiyeapi.dev/api/v1/provinces")
+      .then((response) => response.json())
+      .then((data) => {
+        const cityData = data.data.map((city) => ({
+          id: city.id,
+          name: city.name,
+        }));
+        setCities(cityData);
+      })
+      .catch((error) => console.error("Error fetching cities:", error));
+  }, []);
+
+  const handleCityChange = (event) => {
+    const cityId = event.target.value;
+
+    fetch(`https://turkiyeapi.dev/api/v1/districts?province=${cityId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSelectedCity(cityId);
+        setSelectedCityDistricts(data.data);
+      })
+      .catch((error) =>
+        console.error("Error fetching districts for selected city:", error)
+      );
+  };
+
   return (
     <div>
       <Header />
@@ -156,6 +187,36 @@ const OrderPage = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Label>Telefon</Form.Label>
               <Form.Control type="text" placeholder="Telefon" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+              <Form.Label>Şehir</Form.Label>
+              <Form.Control as="select" onChange={handleCityChange}>
+                <option value="">Seçiniz</option>
+                {cities.map((city) => (
+                  <option key={city.id} value={city.id}>
+                    {city.name}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+              <Form.Label>İlçe</Form.Label>
+              <Form.Control as="select">
+                <option value="">İlçe Seçiniz</option>
+                {selectedCityDistricts.map((district) => (
+                  <option key={district.id} value={district.id}>
+                    {district.name}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+              <Form.Label>Mahalle</Form.Label>
+              <Form.Control type="text" placeholder="Mahalle" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+              <Form.Label>Adres</Form.Label>
+              <Form.Control type="text" placeholder="Adres" />
             </Form.Group>
           </Form>
         </Modal.Body>
