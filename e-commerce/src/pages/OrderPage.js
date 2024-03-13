@@ -5,6 +5,9 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { fetchUserAdress } from "../store/thunk/fetchUserAdress";
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 
 const OrderPage = () => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
@@ -14,6 +17,7 @@ const OrderPage = () => {
   const userAddresses = useSelector((state) => state.user.addresses);
   const isLoading = useSelector((state) => state.user.loading);
   const [showBillingAddress, setShowBillingAddress] = useState(true);
+  const [showAddressForm, setShowAddressForm] = useState(false);
 
   useEffect(() => {
     if (!userToken) {
@@ -46,6 +50,9 @@ const OrderPage = () => {
       2
     );
   };
+
+  const handleClose = () => setShowAddressForm(false);
+  const handleShow = () => setShowAddressForm(true);
   return (
     <div>
       <Header />
@@ -81,6 +88,9 @@ const OrderPage = () => {
               <div className=" flex flex-col border-3 border-[#9bc8e3]-400 rounded-lg px-5 justify-center pb-4 mb-4">
                 Yeni adres ekle
                 <i class="fa-solid fa-plus "></i>
+                <Button variant="outline-primary" onClick={handleShow}>
+                  Yeni Adres Ekle
+                </Button>
               </div>
             </div>
             {!showBillingAddress && (
@@ -90,6 +100,9 @@ const OrderPage = () => {
                 <div className=" flex flex-col border-3 border-[#9bc8e3]-400 rounded-lg px-5 justify-center pb-4 mb-4">
                   Yeni adres ekle
                   <i class="fa-solid fa-plus "></i>
+                  <Button variant="outline-primary" onClick={handleShow}>
+                    Yeni Adres Ekle
+                  </Button>
                 </div>
               </div>
             )}
@@ -126,6 +139,35 @@ const OrderPage = () => {
           </div>
         </div>
       </div>
+      <Modal show={showAddressForm} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Yeni Adres Ekle</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Adres Başlığı</Form.Label>
+              <Form.Control type="text" placeholder="Adres Başlığı" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+              <Form.Label>Ad Soyad</Form.Label>
+              <Form.Control type="text" placeholder="Ad Soyad" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+              <Form.Label>Telefon</Form.Label>
+              <Form.Control type="text" placeholder="Telefon" />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="outline-secondary" onClick={handleClose}>
+            Kapat
+          </Button>
+          <Button variant="outline-primary" onClick={handleClose}>
+            Kaydet
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
