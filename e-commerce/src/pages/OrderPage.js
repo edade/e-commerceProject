@@ -21,6 +21,7 @@ const OrderPage = () => {
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedCityDistricts, setSelectedCityDistricts] = useState([]);
+  const address = useSelector((state) => state.shoppingCard.address);
 
   useEffect(() => {
     if (!userToken) {
@@ -116,24 +117,69 @@ const OrderPage = () => {
                   <div>Faturamı aynı adrese gönder</div>
                 </div>
               </div>
-              <div className=" flex flex-col border-3 border-[#9bc8e3]-400 rounded-lg px-5 justify-center pb-4 mb-4">
-                Yeni adres ekle
-                <i class="fa-solid fa-plus "></i>
-                <Button variant="outline-primary" onClick={handleShow}>
-                  Yeni Adres Ekle
-                </Button>
+              <div className=" flex flex-row justify-around gap-3 px-2 ">
+                <div className="flex flex-col border-3 my-3 w-1/2 h-40 border-[#9bc8e3]-400 rounded-lg justify-center">
+                  <Button
+                    variant="outline-primary"
+                    className="h-full"
+                    onClick={handleShow}
+                  >
+                    <i class="fa-solid fa-plus "></i>
+                    Yeni Adres Ekle
+                  </Button>
+                </div>
+                <div className="w-1/2 border-3 my-3 border-[#9bc8e3]-400 rounded-lg justify-center">
+                  {address.map((address) => (
+                    <div key={address.id}>
+                      <div className="flex flex-row justify-between">
+                        <p>
+                          <i class="fa-solid fa-user" /> {address.name}
+                        </p>
+                        <p>
+                          <i class="fa-solid fa-phone" /> {address.phone}
+                        </p>
+                      </div>
+                      <p>Adres: {address.address}</p>
+                      <p>
+                        {address.city}/ {address.district}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
             {!showBillingAddress && (
-              <div className="flex flex-col border-3 border-[#9bc8e3]-400 rounded-lg gap-3">
+              <div className="flex flex-col border-3 border-[#9bc8e3]-400 rounded-lg gap-3 px-2">
                 <div className="text-left">Fatura Adresi</div>
-
-                <div className=" flex flex-col border-3 border-[#9bc8e3]-400 rounded-lg px-5 justify-center pb-4 mb-4">
-                  Yeni adres ekle
-                  <i class="fa-solid fa-plus "></i>
-                  <Button variant="outline-primary" onClick={handleShow}>
-                    Yeni Adres Ekle
-                  </Button>
+                <div className=" flex flex-row justify-around gap-3 ">
+                  <div className="flex flex-col border-3 my-3 w-1/2 h-40 border-[#9bc8e3]-400 rounded-lg justify-center">
+                    <Button
+                      variant="outline-primary"
+                      className="h-full"
+                      onClick={handleShow}
+                    >
+                      <i class="fa-solid fa-plus "></i>
+                      Yeni Adres Ekle
+                    </Button>
+                  </div>
+                  <div className="w-1/2 border-3 my-3 border-[#9bc8e3]-400 rounded-lg justify-center">
+                    {address.map((address) => (
+                      <div key={address.id}>
+                        <div className="flex flex-row justify-between">
+                          <p>
+                            <i class="fa-solid fa-user" /> {address.name}
+                          </p>
+                          <p>
+                            <i class="fa-solid fa-phone" /> {address.phone}
+                          </p>
+                        </div>
+                        <p>Adres: {address.address}</p>
+                        <p>
+                          {address.city}/ {address.district}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}
