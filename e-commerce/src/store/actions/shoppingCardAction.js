@@ -46,3 +46,17 @@ export const setAddressInfo = (address) => {
     payload: address,
   };
 };
+
+export const addAddress = (newAddress) => {
+  return {
+    type: "ADD_ADDRESS",
+    payload: newAddress,
+  };
+};
+
+export const updateAddress = (id, updatedAddress) => {
+  return {
+    type: "UPDATE_ADDRESS",
+    payload: { id, updatedAddress },
+  };
+};

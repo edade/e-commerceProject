@@ -8,6 +8,8 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { AddAddress } from "../store/thunk/AddAddress";
+import { addAddress } from "../store/actions/shoppingCardAction";
 
 const OrderPage = () => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
@@ -22,6 +24,18 @@ const OrderPage = () => {
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedCityDistricts, setSelectedCityDistricts] = useState([]);
   const address = useSelector((state) => state.shoppingCard.address);
+  const [formData, setFormData] = useState({
+    address: "",
+    city: "",
+    district: "",
+    id: "",
+    name: "",
+    neighborhood: "",
+    phone: "",
+    surname: "",
+    title: "",
+    user_id: "",
+  });
 
   useEffect(() => {
     if (!userToken) {
@@ -85,6 +99,15 @@ const OrderPage = () => {
       );
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSaveAddress = () => {
+    dispatch(AddAddress(formData, handleClose));
+  };
+
   return (
     <div>
       <Header />
@@ -117,8 +140,8 @@ const OrderPage = () => {
                   <div>Faturamı aynı adrese gönder</div>
                 </div>
               </div>
-              <div className=" flex flex-row justify-around gap-3 px-2 ">
-                <div className="flex flex-col border-3 my-3 w-1/2 h-40 border-[#9bc8e3]-400 rounded-lg justify-center">
+              <div className=" flex flex-row flex-wrap justify-around px-3 ">
+                <div className="flex flex-col border-3 my-3 h-40 w-2/4 border-[#9bc8e3]-400 rounded-lg justify-center">
                   <Button
                     variant="outline-primary"
                     className="h-full"
@@ -128,31 +151,39 @@ const OrderPage = () => {
                     Yeni Adres Ekle
                   </Button>
                 </div>
-                <div className="w-1/2 border-3 my-3 border-[#9bc8e3]-400 rounded-lg justify-center">
-                  {address.map((address) => (
-                    <div key={address.id}>
-                      <div className="flex flex-row justify-between">
-                        <p>
-                          <i class="fa-solid fa-user" /> {address.name}
-                        </p>
-                        <p>
-                          <i class="fa-solid fa-phone" /> {address.phone}
-                        </p>
-                      </div>
-                      <p>Adres: {address.address}</p>
+                {address.map((address) => (
+                  <div
+                    key={address.id}
+                    className="border-3 my-3 p-3 h-40 border-[#9bc8e3]-400 rounded-lg w-2/4"
+                  >
+                    <div className="flex flex-row justify-between">
                       <p>
-                        {address.city}/ {address.district}
+                        <i className="fa-solid fa-user" /> {address.name}
+                      </p>
+                      <p>
+                        <i className="fa-solid fa-phone" /> {address.phone}
                       </p>
                     </div>
-                  ))}
-                </div>
+                    <p className="text-left py-2">Adres: {address.address}</p>
+                    <p className="text-left">
+                      {address.city}/ {address.district}
+                    </p>
+                    <div className="text-end">
+                      <button className="text-right py-2 text-blue-400">
+                        Düzenle
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
             {!showBillingAddress && (
-              <div className="flex flex-col border-3 border-[#9bc8e3]-400 rounded-lg gap-3 px-2">
-                <div className="text-left">Fatura Adresi</div>
-                <div className=" flex flex-row justify-around gap-3 ">
-                  <div className="flex flex-col border-3 my-3 w-1/2 h-40 border-[#9bc8e3]-400 rounded-lg justify-center">
+              <div className="flex flex-col border-3 border-[#9bc8e3]-400 rounded-lg gap-3">
+                <div className=" flex justify-between flex-row ">
+                  <div>Fatura Adresi</div>
+                </div>
+                <div className=" flex flex-row flex-wrap justify-around px-3 ">
+                  <div className="flex flex-col border-3 my-3 h-40 w-2/4 border-[#9bc8e3]-400 rounded-lg justify-center">
                     <Button
                       variant="outline-primary"
                       className="h-full"
@@ -162,24 +193,25 @@ const OrderPage = () => {
                       Yeni Adres Ekle
                     </Button>
                   </div>
-                  <div className="w-1/2 border-3 my-3 border-[#9bc8e3]-400 rounded-lg justify-center">
-                    {address.map((address) => (
-                      <div key={address.id}>
-                        <div className="flex flex-row justify-between">
-                          <p>
-                            <i class="fa-solid fa-user" /> {address.name}
-                          </p>
-                          <p>
-                            <i class="fa-solid fa-phone" /> {address.phone}
-                          </p>
-                        </div>
-                        <p>Adres: {address.address}</p>
+                  {address.map((address) => (
+                    <div
+                      key={address.id}
+                      className="border-3 my-3 p-3 h-40 border-[#9bc8e3]-400 rounded-lg w-2/4"
+                    >
+                      <div className="flex flex-row justify-between">
                         <p>
-                          {address.city}/ {address.district}
+                          <i className="fa-solid fa-user" /> {address.name}
+                        </p>
+                        <p>
+                          <i className="fa-solid fa-phone" /> {address.phone}
                         </p>
                       </div>
-                    ))}
-                  </div>
+                      <p className="text-left py-2">Adres: {address.address}</p>
+                      <p className="text-left">
+                        {address.city}/ {address.district}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
@@ -224,22 +256,48 @@ const OrderPage = () => {
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Adres Başlığı</Form.Label>
-              <Form.Control type="text" placeholder="Adres Başlığı" />
+              <Form.Control
+                type="text"
+                placeholder="Adres Başlığı"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
               <Form.Label>Ad Soyad</Form.Label>
-              <Form.Control type="text" placeholder="Ad Soyad" />
+              <Form.Control
+                type="text"
+                placeholder="Ad Soyad"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Label>Telefon</Form.Label>
-              <Form.Control type="text" placeholder="Telefon" />
+              <Form.Control
+                type="text"
+                placeholder="Telefon"
+                name="phone"
+                value={formData.phone}
+                onChange={handleInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Label>Şehir</Form.Label>
-              <Form.Control as="select" onChange={handleCityChange}>
+              <Form.Control
+                as="select"
+                name="city"
+                value={formData.city}
+                onChange={(e) => {
+                  handleCityChange(e);
+                  handleInputChange(e);
+                }}
+              >
                 <option value="">Seçiniz</option>
                 {cities.map((city) => (
-                  <option key={city.id} value={city.id}>
+                  <option key={city.id} value={city.name}>
                     {city.name}
                   </option>
                 ))}
@@ -247,10 +305,17 @@ const OrderPage = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Label>İlçe</Form.Label>
-              <Form.Control as="select">
+              <Form.Control
+                as="select"
+                name="district"
+                value={formData.district}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+              >
                 <option value="">İlçe Seçiniz</option>
                 {selectedCityDistricts.map((district) => (
-                  <option key={district.id} value={district.id}>
+                  <option key={district.id} value={district.name}>
                     {district.name}
                   </option>
                 ))}
@@ -258,11 +323,23 @@ const OrderPage = () => {
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Label>Mahalle</Form.Label>
-              <Form.Control type="text" placeholder="Mahalle" />
+              <Form.Control
+                type="text"
+                placeholder="Mahalle"
+                name="neighborhood"
+                value={formData.neighborhood}
+                onChange={handleInputChange}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Label>Adres</Form.Label>
-              <Form.Control type="text" placeholder="Adres" />
+              <Form.Control
+                type="text"
+                placeholder="Adres"
+                name="address"
+                value={formData.address}
+                onChange={handleInputChange}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -270,7 +347,7 @@ const OrderPage = () => {
           <Button variant="outline-secondary" onClick={handleClose}>
             Kapat
           </Button>
-          <Button variant="outline-primary" onClick={handleClose}>
+          <Button variant="outline-primary" onClick={handleSaveAddress}>
             Kaydet
           </Button>
         </Modal.Footer>

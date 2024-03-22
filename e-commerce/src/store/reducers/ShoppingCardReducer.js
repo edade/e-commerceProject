@@ -1,7 +1,7 @@
 const ShoppingCardInitial = {
   cart: [],
   payment: {},
-  address: {},
+  address: [],
 };
 
 export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
@@ -46,7 +46,7 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
         ...state,
         cart: state.cart.map((item) =>
           item.product.id === action.payload
-            ? { ...item, count: item.count - 1 } // Adet azaltma
+            ? { ...item, count: item.count - 1 }
             : item
         ),
       };
@@ -55,7 +55,7 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
         ...state,
         cart: state.cart.map((item) =>
           item.product.id === action.payload
-            ? { ...item, count: item.count + 1 } // Adet artırma
+            ? { ...item, count: item.count + 1 }
             : item
         ),
       };
@@ -68,6 +68,18 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
       return { ...state, payment: action.payload };
     case "SET_ADDRESS_INFO":
       return { ...state, address: action.payload };
+
+    case "ADD_ADDRESS":
+      return {
+        ...state,
+        address: [...state.address, action.payload],
+      };
+    case "UPDATE_ADDRESS":
+      const { id, updatedAddress } = action.payload;
+      const updatedAddresses = state.address.map((address) =>
+        address.id === id ? { ...address, ...updatedAddress } : address
+      );
+      return { ...state, address: updatedAddresses };
     default:
       return state;
   }
