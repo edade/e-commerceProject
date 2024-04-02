@@ -70,9 +70,12 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
       return { ...state, address: action.payload };
 
     case "ADD_ADDRESS":
+      const newAddress = action.payload;
+      const updateAddresses = [...state.address, newAddress];
+
       return {
         ...state,
-        address: [...state.address, action.payload],
+        address: updateAddresses,
       };
     case "UPDATE_ADDRESS":
       const { id, updatedAddress } = action.payload;

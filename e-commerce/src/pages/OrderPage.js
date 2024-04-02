@@ -25,16 +25,13 @@ const OrderPage = () => {
   const [selectedCityDistricts, setSelectedCityDistricts] = useState([]);
   const address = useSelector((state) => state.shoppingCard.address);
   const [formData, setFormData] = useState({
-    address: "",
+    title: "",
+    name: "",
+    surname: "",
+    phone: "",
     city: "",
     district: "",
-    id: "",
-    name: "",
     neighborhood: "",
-    phone: "",
-    surname: "",
-    title: "",
-    user_id: "",
   });
 
   useEffect(() => {
@@ -105,7 +102,8 @@ const OrderPage = () => {
   };
 
   const handleSaveAddress = () => {
-    dispatch(AddAddress(formData, handleClose));
+    const addressData = { ...formData, user_id: userToken };
+    dispatch(AddAddress(addressData, handleClose));
   };
 
   return (
@@ -265,12 +263,22 @@ const OrderPage = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-              <Form.Label>Ad Soyad</Form.Label>
+              <Form.Label>Ad</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Ad Soyad"
-                name="fullName"
-                value={formData.fullName}
+                placeholder="Ad"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+              <Form.Label>Soyad</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Soyad"
+                name="surname"
+                value={formData.surname}
                 onChange={handleInputChange}
               />
             </Form.Group>
