@@ -82,18 +82,45 @@ const OrderPage = () => {
       .catch((error) => console.error("Error fetching cities:", error));
   }, []);
 
-  const handleCityChange = (event) => {
-    const cityId = event.target.value;
+  const handleCityChange = async (event) => {
+    const cityName = event.target.value;
+    const cityId = await getCityId(cityName);
 
-    fetch(`https://turkiyeapi.dev/api/v1/districts?province=${cityId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setSelectedCity(cityId);
-        setSelectedCityDistricts(data.data);
-      })
-      .catch((error) =>
-        console.error("Error fetching districts for selected city:", error)
+    if (cityId) {
+      fetch(`https://turkiyeapi.dev/api/v1/provinces/${cityId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setSelectedCity(cityId);
+          const districtData = data.data.districts.map((district) => ({
+            id: district.id,
+            name: district.name,
+          }));
+          setSelectedCityDistricts(districtData);
+        })
+        .catch((error) =>
+          console.error("Error fetching districts for selected city:", error)
+        );
+    } else {
+      console.error("City ID not found.");
+    }
+  };
+
+  const getCityId = async (cityName) => {
+    try {
+      const response = await fetch(
+        `https://turkiyeapi.dev/api/v1/provinces?name=${cityName}`
       );
+      const data = await response.json();
+      const city = data.data.find((city) => city.name === cityName);
+      if (city) {
+        return city.id;
+      } else {
+        throw new Error("City not found");
+      }
+    } catch (error) {
+      console.error("Error fetching city ID:", error);
+      return null;
+    }
   };
 
   const handleInputChange = (e) => {
