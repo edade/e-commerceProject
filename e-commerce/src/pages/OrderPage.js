@@ -16,11 +16,12 @@ const OrderPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const userToken = useSelector((state) => state.user.token);
-  const userAddresses = useSelector((state) => state.user.addresses);
   const isLoading = useSelector((state) => state.user.loading);
   const [showBillingAddress, setShowBillingAddress] = useState(true);
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [cities, setCities] = useState([]);
+  const [selectedAddressId, setSelectedAddressId] = useState(null);
+  const [selectedBillingId, setSelectedBillgingId] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedCityDistricts, setSelectedCityDistricts] = useState([]);
   const address = useSelector((state) => state.shoppingCard.address);
@@ -179,7 +180,10 @@ const OrderPage = () => {
                 {address.map((address) => (
                   <div
                     key={address.id}
-                    className="border-3 my-3 p-3 h-40 border-[#9bc8e3]-400 rounded-lg w-2/4"
+                    className={`border-3 my-3 p-3 h-40 border-[#9bc8e3]-400 rounded-lg w-2/4 ${
+                      address.id === selectedAddressId ? "border-blue-500" : ""
+                    }`}
+                    onClick={() => setSelectedAddressId(address.id)}
                   >
                     <div className="flex flex-row justify-between">
                       <p>
@@ -221,7 +225,12 @@ const OrderPage = () => {
                   {address.map((address) => (
                     <div
                       key={address.id}
-                      className="border-3 my-3 p-3 h-40 border-[#9bc8e3]-400 rounded-lg w-2/4"
+                      className={`border-3 my-3 p-3 h-40 border-[#9bc8e3]-400 rounded-lg w-2/4 ${
+                        address.id === selectedBillingId
+                          ? "border-blue-500"
+                          : ""
+                      }`}
+                      onClick={() => setSelectedBillgingId(address.id)}
                     >
                       <div className="flex flex-row justify-between">
                         <p>
