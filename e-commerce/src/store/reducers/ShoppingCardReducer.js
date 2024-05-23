@@ -2,6 +2,7 @@ const ShoppingCardInitial = {
   cart: [],
   payment: {},
   address: [],
+  cards: [],
 };
 
 export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
@@ -95,6 +96,20 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
         address: state.address.filter(
           (address) => address.id !== action.payload
         ),
+      };
+    case "SET_CARDS":
+      return { ...state, cards: action.payload };
+    case "ADD_CARD":
+      return { ...state, cards: [...state.cards, action.payload] };
+    case "UPDATE_CARD":
+      const updatedCards = state.cards.map((card) =>
+        card.id === action.payload.id ? action.payload : card
+      );
+      return { ...state, cards: updatedCards };
+    case "REMOVE_CARD":
+      return {
+        ...state,
+        cards: state.cards.filter((card) => card.id !== action.payload),
       };
     default:
       return state;

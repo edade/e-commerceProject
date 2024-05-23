@@ -67,3 +67,31 @@ export const removeAddress = (id) => {
     payload: id,
   };
 };
+
+export const setCards = (cards) => {
+  return {
+    type: "SET_CARDS",
+    payload: cards,
+  };
+};
+
+export const addCard = (card) => {
+  return {
+    type: "ADD_CARD",
+    payload: card,
+  };
+};
+
+export const updateCard = (card) => {
+  return {
+    type: "UPDATE_CARD",
+    payload: card,
+  };
+};
+
+export const removeCard = (id) => {
+  return {
+    type: "REMOVE_CARD",
+    payload: id,
+  };
+};
