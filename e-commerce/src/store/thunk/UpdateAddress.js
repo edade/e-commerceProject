@@ -8,7 +8,7 @@ import { updateAddress } from "../actions/shoppingCardAction";
 //         `/user/address/${id}`,
 //         updatedAddress
 //       );
-//       dispatch(updateAddress(id, response.data)); // Redux state'i güncelle
+//       dispatch(updateAddress(id, response.data));
 //     } catch (error) {
 //       console.error("Address update failed:", error);
 //     }

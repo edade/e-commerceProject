@@ -10,6 +10,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { AddAddress } from "../store/thunk/AddAddress";
 import EditAddressForm from "../components/EditAddressForm";
+import { RemoveAddress } from "../store/thunk/RemoveAddress";
 
 const OrderPage = () => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
@@ -69,7 +70,18 @@ const OrderPage = () => {
   };
 
   const handleClose = () => setShowAddressForm(false);
-  const handleShow = () => setShowAddressForm(true);
+  const handleShow = () => {
+    setFormData({
+      title: "",
+      name: "",
+      surname: "",
+      phone: "",
+      city: "",
+      district: "",
+      neighborhood: "",
+    });
+    setShowAddressForm(true);
+  };
   const handleEditClose = () => setShowEditForm(false);
 
   useEffect(() => {
@@ -146,6 +158,14 @@ const OrderPage = () => {
     setShowEditForm(true);
   };
 
+  const handleDeleteAddress = (id) => {
+    dispatch(
+      RemoveAddress(id, () => {
+        dispatch(fetchUserAdress());
+      })
+    );
+  };
+
   return (
     <div>
       <Header />
@@ -210,6 +230,15 @@ const OrderPage = () => {
                       {address.city}/ {address.district}
                     </p>
                     <div className="text-end">
+                      <button
+                        className="text-gray-600 mr-3"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteAddress(address.id);
+                        }}
+                      >
+                        Sil
+                      </button>
                       <button
                         className="text-right py-2 text-blue-400"
                         onClick={(e) => {

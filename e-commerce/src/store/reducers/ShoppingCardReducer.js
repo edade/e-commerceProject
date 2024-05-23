@@ -90,11 +90,12 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
       return { ...state, address: updatedAddresses };
 
     case "REMOVE_ADDRESS":
-      const addressIdToRemove = action.payload;
-      const filteredAddresses = state.address.filter(
-        (address) => address.id !== addressIdToRemove
-      );
-      return { ...state, address: filteredAddresses };
+      return {
+        ...state,
+        address: state.address.filter(
+          (address) => address.id !== action.payload
+        ),
+      };
     default:
       return state;
   }
