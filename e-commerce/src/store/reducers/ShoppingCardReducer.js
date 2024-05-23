@@ -82,10 +82,10 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
         ...state,
         address: [...state.address, action.payload],
       };
+
     case "UPDATE_ADDRESS":
-      const { id, updatedAddress } = action.payload;
       const updatedAddresses = state.address.map((address) =>
-        address.id === id ? { ...address, ...updatedAddress } : address
+        address.id === action.payload.id ? action.payload : address
       );
       return { ...state, address: updatedAddresses };
 

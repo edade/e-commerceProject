@@ -9,7 +9,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { AddAddress } from "../store/thunk/AddAddress";
-import { addAddress } from "../store/actions/shoppingCardAction";
+import EditAddressForm from "../components/EditAddressForm";
 
 const OrderPage = () => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
@@ -19,6 +19,7 @@ const OrderPage = () => {
   const isLoading = useSelector((state) => state.user.loading);
   const [showBillingAddress, setShowBillingAddress] = useState(true);
   const [showAddressForm, setShowAddressForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
   const [cities, setCities] = useState([]);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [selectedBillingId, setSelectedBillgingId] = useState(null);
@@ -69,6 +70,7 @@ const OrderPage = () => {
 
   const handleClose = () => setShowAddressForm(false);
   const handleShow = () => setShowAddressForm(true);
+  const handleEditClose = () => setShowEditForm(false);
 
   useEffect(() => {
     fetch("https://turkiyeapi.dev/api/v1/provinces")
@@ -129,22 +131,6 @@ const OrderPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleEditAddress = (address) => {
-    // Seçilen adresin bilgilerini formData state'ine yükle
-    setFormData({
-      title: address.title,
-      name: address.name,
-      surname: address.surname,
-      phone: address.phone,
-      city: address.city,
-      district: address.district,
-      neighborhood: address.neighborhood,
-      address: address.address,
-    });
-    // Modal'ı aç
-    handleShow();
-  };
-
   const handleSaveAddress = () => {
     const addressData = { ...formData, user_id: userToken };
     dispatch(
@@ -153,6 +139,11 @@ const OrderPage = () => {
         dispatch(fetchUserAdress());
       })
     );
+  };
+
+  const handleEditAddress = (address) => {
+    setFormData(address);
+    setShowEditForm(true);
   };
 
   return (
@@ -221,7 +212,10 @@ const OrderPage = () => {
                     <div className="text-end">
                       <button
                         className="text-right py-2 text-blue-400"
-                        onClick={() => handleEditAddress(address)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEditAddress(address);
+                        }}
                       >
                         Düzenle
                       </button>
@@ -306,6 +300,7 @@ const OrderPage = () => {
           </div>
         </div>
       </div>
+
       <Modal show={showAddressForm} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Yeni Adres Ekle</Modal.Title>
@@ -420,6 +415,12 @@ const OrderPage = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <EditAddressForm
+        show={showEditForm}
+        handleClose={handleEditClose}
+        address={formData}
+      />
     </div>
   );
 };

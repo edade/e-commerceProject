@@ -54,9 +54,16 @@ export const addAddress = (newAddress) => {
   };
 };
 
-export const updateAddress = (id, updatedAddress) => {
+export const updateAddress = (address) => {
   return {
     type: "UPDATE_ADDRESS",
-    payload: { id, updatedAddress },
+    payload: address,
+  };
+};
+
+export const removeAddress = (id) => {
+  return {
+    type: "REMOVE_ADDRESS",
+    payload: id,
   };
 };
