@@ -69,13 +69,18 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
     case "SET_ADDRESS_INFO":
       return { ...state, address: action.payload };
 
-    case "ADD_ADDRESS":
-      const newAddress = action.payload;
-      const updateAddresses = [...state.address, newAddress];
+    // case "ADD_ADDRESS":
+    //   const newAddress = action.payload;
+    //   const updateAddresses = [...state.address, newAddress];
 
+    //   return {
+    //     ...state,
+    //     address: updateAddresses,
+    //   };
+    case "ADD_ADDRESS":
       return {
         ...state,
-        address: updateAddresses,
+        address: [...state.address, action.payload],
       };
     case "UPDATE_ADDRESS":
       const { id, updatedAddress } = action.payload;
@@ -83,6 +88,13 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
         address.id === id ? { ...address, ...updatedAddress } : address
       );
       return { ...state, address: updatedAddresses };
+
+    case "REMOVE_ADDRESS":
+      const addressIdToRemove = action.payload;
+      const filteredAddresses = state.address.filter(
+        (address) => address.id !== addressIdToRemove
+      );
+      return { ...state, address: filteredAddresses };
     default:
       return state;
   }

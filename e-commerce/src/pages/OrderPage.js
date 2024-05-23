@@ -129,9 +129,30 @@ const OrderPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleEditAddress = (address) => {
+    // Seçilen adresin bilgilerini formData state'ine yükle
+    setFormData({
+      title: address.title,
+      name: address.name,
+      surname: address.surname,
+      phone: address.phone,
+      city: address.city,
+      district: address.district,
+      neighborhood: address.neighborhood,
+      address: address.address,
+    });
+    // Modal'ı aç
+    handleShow();
+  };
+
   const handleSaveAddress = () => {
     const addressData = { ...formData, user_id: userToken };
-    dispatch(AddAddress(addressData, handleClose));
+    dispatch(
+      AddAddress(addressData, () => {
+        handleClose();
+        dispatch(fetchUserAdress());
+      })
+    );
   };
 
   return (
@@ -198,7 +219,10 @@ const OrderPage = () => {
                       {address.city}/ {address.district}
                     </p>
                     <div className="text-end">
-                      <button className="text-right py-2 text-blue-400">
+                      <button
+                        className="text-right py-2 text-blue-400"
+                        onClick={() => handleEditAddress(address)}
+                      >
                         Düzenle
                       </button>
                     </div>
