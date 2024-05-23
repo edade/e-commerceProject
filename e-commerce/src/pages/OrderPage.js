@@ -177,7 +177,7 @@ const OrderPage = () => {
                 Adres Bilgilerim
               </div>
               <div className="w-1/2 border-3 border-[#9bc8e3]-400 rounded-lg">
-                Kart Bilgilerim
+                <Link to="/card">Kart Bilgilerim </Link>
               </div>
             </div>
             <div className="border-3 border-[#9bc8e3]-400 rounded-lg">
@@ -297,7 +297,7 @@ const OrderPage = () => {
               </div>
             )}
           </div>
-          <div className="border-3 border-[#9bc8e3]-400 rounded-lg w-[20%] py-2 h-2/5 text-sm">
+          <div className="border-3 border-[#9bc8e3]-400  rounded-lg w-[20%] py-2 h-2/5 text-sm">
             <button className="text-white bg-[#23A6F0] py-3 px-4 rounded mb-3">
               Kaydet ve Devam Et
             </button>
