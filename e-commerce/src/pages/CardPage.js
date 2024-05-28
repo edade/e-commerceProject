@@ -21,6 +21,7 @@ const CardPage = () => {
   const [showCardForm, setShowCardForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedInstallment, setSelectedInstallment] = useState(null);
 
   const [formData, setFormData] = useState({
     card_no: "",
@@ -106,6 +107,10 @@ const CardPage = () => {
 
   const handleCardSelect = (card) => {
     setSelectedCard(card);
+  };
+
+  const handleInstallmentSelect = (installment) => {
+    setSelectedInstallment(installment);
   };
 
   const totalAmount = calculateGrandTotalPrice();
@@ -198,7 +203,8 @@ const CardPage = () => {
 
             <div className=" flex flex-col border-3 border-[#9bc8e3]-400 rounded-lg p-3 w-1/3">
               <h3 className="text-lg font-bold">Taksit Seçenekleri</h3>
-              <div className="grid grid-cols-3 gap-4 border-t border-gray-300 py-2">
+              <div className="grid grid-cols-4 text-right gap-4 border-t border-gray-300 py-2">
+                <p className="font-bold col-span-1"></p>
                 <p className="font-bold">Taksit Sayısı</p>
                 <p className="font-bold">Aylık Ödeme</p>
                 <p className="font-bold">Toplam Ödeme</p>
@@ -206,8 +212,14 @@ const CardPage = () => {
               {paymentOptions.map((option, index) => (
                 <div
                   key={index}
-                  className="grid grid-cols-3 gap-4 border-t border-gray-300 py-2"
+                  className="grid grid-cols-4 gap-4 border-t border-gray-300 py-2"
                 >
+                  <input
+                    type="checkbox"
+                    className="form-checkbox text-center h-4 w-4 text-blue-600 rounded-full"
+                    checked={selectedInstallment === option.installment}
+                    onChange={() => handleInstallmentSelect(option.installment)}
+                  />
                   <p>{option.installment}</p>
                   <p>{option.monthlyPayment} TL</p>
                   <p>{option.totalPayment} TL</p>
