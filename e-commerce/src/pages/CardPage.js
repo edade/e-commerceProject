@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import AddCardForm from "../components/AddCardForm";
 import EditCardForm from "../components/EditCardForm";
 import { UpdateCard } from "../store/thunk/UpdateCard";
+import { RemoveCard } from "../store/thunk/RemoveCard";
 
 const CardPage = () => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
@@ -92,6 +93,14 @@ const CardPage = () => {
     );
   };
 
+  const handleDeleteCard = (cardId) => {
+    dispatch(
+      RemoveCard(cardId, () => {
+        dispatch(fetchUserCards());
+      })
+    );
+  };
+
   return (
     <div>
       <Header />
@@ -130,20 +139,33 @@ const CardPage = () => {
                   key={card.id}
                   className="border-3 my-3 p-3 h-40 border-[#9bc8e3]-400 rounded-lg w-2/4"
                 >
-                  <div className="flex flex-row justify-between">
+                  <p className="text-left py-2">
+                    Kart Sahibi: {card.name_on_card}
+                  </p>
+                  <div className="flex text-left flex-row justify-between">
                     <p> Kart Numarası: {card.card_no}</p>
                     <p>
                       Son Kullanma Tarihi: {card.expire_month}/
                       {card.expire_year}
                     </p>
                   </div>
-                  <p className="text-left py-2">
-                    Kart Sahibi: {card.name_on_card}
-                  </p>
+
                   <div className="text-end">
                     <button
+                      className="text-gray-600 mr-3"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteCard(card.id);
+                      }}
+                    >
+                      Sil
+                    </button>
+                    <button
                       className="text-right py-2 text-blue-400"
-                      onClick={() => handleEditCardClick(card)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEditCardClick(card);
+                      }}
                     >
                       Düzenle
                     </button>
