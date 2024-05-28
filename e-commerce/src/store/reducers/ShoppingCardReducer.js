@@ -102,12 +102,11 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
     case "ADD_CARD":
       return { ...state, cards: [...state.cards, action.payload] };
     case "UPDATE_CARD":
-      return {
-        ...state,
-        cards: state.cards.map((card) =>
-          card.id === action.payload.id ? action.payload : card
-        ),
-      };
+      const updatedCards = state.cards.map((card) =>
+        card.id === action.payload.id ? action.payload : card
+      );
+      return { ...state, cards: updatedCards };
+
     case "REMOVE_CARD":
       return {
         ...state,

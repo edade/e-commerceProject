@@ -7,6 +7,8 @@ import { AddCard } from "../store/thunk/AddCard";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import AddCardForm from "../components/AddCardForm";
+import EditCardForm from "../components/EditCardForm";
+import { UpdateCard } from "../store/thunk/UpdateCard";
 
 const CardPage = () => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
@@ -15,6 +17,13 @@ const CardPage = () => {
   const history = useHistory();
   const userToken = useSelector((state) => state.user.token);
   const [showCardForm, setShowCardForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [formData, setFormData] = useState({
+    card_no: "",
+    expire_month: "",
+    expire_year: "",
+    name_on_card: "",
+  });
 
   useEffect(() => {
     if (!userToken) {
@@ -56,10 +65,28 @@ const CardPage = () => {
     setShowCardForm(false);
   };
 
+  const handleEditCardClick = (card) => {
+    setFormData(card);
+    setShowEditForm(true);
+  };
+
+  const handleCloseEditCardForm = () => {
+    setShowEditForm(false);
+  };
+
   const handleSaveCard = (cardData) => {
     dispatch(
       AddCard(cardData, () => {
         setShowCardForm(false);
+        dispatch(fetchUserCards());
+      })
+    );
+  };
+
+  const handleUpdateCard = (updatedCard) => {
+    dispatch(
+      UpdateCard(updatedCard, () => {
+        setShowEditForm(false);
         dispatch(fetchUserCards());
       })
     );
@@ -113,6 +140,14 @@ const CardPage = () => {
                   <p className="text-left py-2">
                     Kart Sahibi: {card.name_on_card}
                   </p>
+                  <div className="text-end">
+                    <button
+                      className="text-right py-2 text-blue-400"
+                      onClick={() => handleEditCardClick(card)}
+                    >
+                      Düzenle
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -153,6 +188,12 @@ const CardPage = () => {
         show={showCardForm}
         handleClose={handleCloseAddCardForm}
         handleSaveCard={handleSaveCard}
+      />
+      <EditCardForm
+        show={showEditForm}
+        handleClose={handleCloseEditCardForm}
+        card={formData}
+        handleSaveCard={handleUpdateCard}
       />
     </div>
   );
