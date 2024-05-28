@@ -158,27 +158,45 @@ const CardPage = () => {
                 {cards.map((card) => (
                   <div
                     key={card.id}
-                    className={`border-3 my-3 p-3 h-40 border-[#9bc8e3]-400 rounded-lg w-1/2 ${
+                    className={` relative border-3 my-3 p-3 h-40 border-[#9bc8e3]-400 rounded-lg w-1/2 ${
                       selectedCard && selectedCard.id === card.id
                         ? "border-blue-500"
                         : ""
                     }`}
                     onClick={() => handleCardSelect(card)}
                   >
-                    <p className="text-left py-2">
-                      Kart Sahibi: {card.name_on_card}
-                    </p>
-                    <div className="flex text-left flex-row justify-between">
-                      <p> Kart Numarası: {card.card_no}</p>
-                      <p>
-                        Son Kullanma Tarihi: {card.expire_month}/
-                        {card.expire_year}
-                      </p>
-                    </div>
+                    <div
+                      className="absolute inset-0 w-full h-full bg-cover bg-center rounded-lg"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(to right bottom, #69b3fd, #61a6fa, #5871f6, #4f50f1, #3d48ec)",
+                      }}
+                    >
+                      <div className="">
+                        <div className="flex justify-between items-center">
+                          <i className="fa-brands fa-cc-visa text-white text-4xl"></i>
+                        </div>
 
-                    <div className="text-end">
+                        <p className="text-white text-left">
+                          {card.name_on_card}
+                        </p>
+                        <div className="flex flex-col text-end ">
+                          <div>
+                            <p className="text-white text-lg mt-2">
+                              **** **** **** {card.card_no.slice(-4)}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-white">
+                              {card.expire_month}/{card.expire_year}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="absolute top-0 right-0 p-2">
                       <button
-                        className="text-gray-600 mr-3"
+                        className="text-gray-800 mr-3"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleDeleteCard(card.id);
@@ -187,7 +205,7 @@ const CardPage = () => {
                         Sil
                       </button>
                       <button
-                        className="text-right py-2 text-blue-400"
+                        className="text-black-400"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleEditCardClick(card);
