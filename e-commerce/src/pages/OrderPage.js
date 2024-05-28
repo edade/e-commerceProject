@@ -291,6 +291,26 @@ const OrderPage = () => {
                       <p className="text-left">
                         {address.city}/ {address.district}
                       </p>
+                      <div className="text-end">
+                        <button
+                          className="text-gray-600 mr-3"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteAddress(address.id);
+                          }}
+                        >
+                          Sil
+                        </button>
+                        <button
+                          className="text-right py-2 text-blue-400"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEditAddress(address);
+                          }}
+                        >
+                          Düzenle
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
