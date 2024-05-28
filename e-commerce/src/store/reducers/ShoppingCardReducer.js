@@ -107,11 +107,11 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
       );
       return { ...state, cards: updatedCards };
 
-    case "REMOVE_CARD":
-      return {
-        ...state,
-        cards: state.cards.filter((card) => card.id !== action.payload),
-      };
+    case "DELETE_CARD":
+      const filteredCards = state.cards.filter(
+        (card) => card.id !== action.payload
+      );
+      return { ...state, cards: filteredCards };
     default:
       return state;
   }

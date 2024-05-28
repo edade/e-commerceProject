@@ -89,9 +89,9 @@ export const updateCard = (card) => {
   };
 };
 
-export const removeCard = (id) => {
+export const deleteCard = (cardId) => {
   return {
-    type: "REMOVE_CARD",
-    payload: id,
+    type: "DELETE_CARD",
+    payload: cardId,
   };
 };
