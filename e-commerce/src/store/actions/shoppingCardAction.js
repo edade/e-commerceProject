@@ -95,3 +95,9 @@ export const deleteCard = (cardId) => {
     payload: cardId,
   };
 };
+
+export const resetCart = () => {
+  return {
+    type: "RESET_CART",
+  };
+};

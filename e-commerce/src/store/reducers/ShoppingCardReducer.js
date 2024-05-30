@@ -112,6 +112,12 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
         (card) => card.id !== action.payload
       );
       return { ...state, cards: filteredCards };
+
+    case "RESET_CART":
+      return {
+        ...state,
+        cart: [],
+      };
     default:
       return state;
   }

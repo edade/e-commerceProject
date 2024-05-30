@@ -11,6 +11,8 @@ import EditCardForm from "../components/EditCardForm";
 import { UpdateCard } from "../store/thunk/UpdateCard";
 import { RemoveCard } from "../store/thunk/RemoveCard";
 import { calculateInstallments } from "../components/CalculateInstallments";
+import { CreateOrder } from "../store/thunk/CreateOrder";
+import { toast } from "react-toastify";
 
 const CardPage = () => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
@@ -111,6 +113,30 @@ const CardPage = () => {
 
   const handleInstallmentSelect = (installment) => {
     setSelectedInstallment(installment);
+  };
+
+  const handleCreateOrder = () => {
+    const orderData = {
+      address_id: 1, // TODO
+      order_date: new Date().toISOString(),
+      card_no: selectedCard.card_no,
+      card_name: selectedCard.name_on_card,
+      card_expire_month: selectedCard.expire_month,
+      card_expire_year: selectedCard.expire_year,
+      card_ccv: 321, // TODO
+      price: calculateGrandTotalPrice(),
+      products: cartItems.map((item) => ({
+        product_id: item.product.id,
+        count: item.count,
+        detail: item.product.name,
+      })),
+    };
+
+    dispatch(
+      CreateOrder(orderData, () => {
+        toast("Siparişiniz başarıyla oluşturuldu!");
+      })
+    );
   };
 
   const totalAmount = calculateGrandTotalPrice();
@@ -246,9 +272,12 @@ const CardPage = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col border-3 border-[#9bc8e3]-400  rounded-lg w-[20%] py-2 h-2/5 text-sm">
-          <button className="text-white bg-[#23A6F0] py-3 px-4 rounded mb-3">
-            Kaydet ve Devam Et
+        <div
+          className=" border-3 border-[#9bc8e3]-400  rounded-lg w-[20%] py-2 h-2/5 text-sm"
+          onClick={handleCreateOrder}
+        >
+          <button className="text-white bg-[#23A6F0] py-3 px-8 rounded mb-3">
+            Siparişi Oluştur
           </button>
           <p className="text-left">SİPARİŞ ÖZETİ</p>
           <div className="flex flex-row justify-between">
@@ -270,11 +299,10 @@ const CardPage = () => {
             <div>Toplam</div>
             <div>${calculateGrandTotalPrice()}</div>
           </div>
-          <Link to="/order">
-            <button className="text-white bg-[#23A6F0] py-3 px-4 rounded mt-3">
-              Kaydet ve Devam Et
-            </button>
-          </Link>
+
+          <button className="text-white bg-[#23A6F0] py-3 px-8 rounded mt-3">
+            Siparişi oluştur
+          </button>
         </div>
       </div>
       <AddCardForm
