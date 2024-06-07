@@ -7,6 +7,7 @@ const userInitial = {
   loading: false,
   error: null,
   addresses: [],
+  selectedAddressId: null,
 };
 
 export const userReducer = (state = userInitial, action) => {
@@ -35,6 +36,12 @@ export const userReducer = (state = userInitial, action) => {
       return state;
     case "USER_DELETE_ADDRESS":
       return state;
+
+    case "SET_SELECTED_ADDRESS":
+      return {
+        ...state,
+        selectedAddressId: action.payload,
+      };
     default:
       return state;
   }

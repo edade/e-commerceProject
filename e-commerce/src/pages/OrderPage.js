@@ -11,6 +11,7 @@ import Modal from "react-bootstrap/Modal";
 import { AddAddress } from "../store/thunk/AddAddress";
 import EditAddressForm from "../components/EditAddressForm";
 import { RemoveAddress } from "../store/thunk/RemoveAddress";
+import { setSelectedAddress } from "../store/actions/userAction";
 
 const OrderPage = () => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
@@ -165,6 +166,10 @@ const OrderPage = () => {
       })
     );
   };
+  const handleAddressSelect = (addressId) => {
+    setSelectedAddressId(addressId);
+    dispatch(setSelectedAddress(addressId));
+  };
 
   return (
     <div>
@@ -215,7 +220,7 @@ const OrderPage = () => {
                     className={`border-3 my-3 p-3 h-40 border-[#9bc8e3]-400 rounded-lg w-2/4 ${
                       address.id === selectedAddressId ? "border-blue-500" : ""
                     }`}
-                    onClick={() => setSelectedAddressId(address.id)}
+                    onClick={() => handleAddressSelect(address.id)}
                   >
                     <div className="flex flex-row justify-between">
                       <p>

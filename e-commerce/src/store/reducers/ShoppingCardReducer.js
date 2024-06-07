@@ -1,6 +1,5 @@
 const ShoppingCardInitial = {
   cart: [],
-  payment: {},
   address: [],
   cards: [],
 };
@@ -118,6 +117,7 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
         ...state,
         cart: [],
       };
+
     default:
       return state;
   }

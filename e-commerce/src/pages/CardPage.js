@@ -17,6 +17,9 @@ import { toast } from "react-toastify";
 const CardPage = () => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
   const cards = useSelector((state) => state.shoppingCard.cards);
+  const selectedAddressId = useSelector(
+    (state) => state.shoppingCard.selectedAddressId
+  );
   const dispatch = useDispatch();
   const history = useHistory();
   const userToken = useSelector((state) => state.user.token);
@@ -117,13 +120,13 @@ const CardPage = () => {
 
   const handleCreateOrder = () => {
     const orderData = {
-      address_id: 1, // TODO
+      address_id: selectedAddressId, // TODO
       order_date: new Date().toISOString(),
       card_no: selectedCard.card_no,
       card_name: selectedCard.name_on_card,
       card_expire_month: selectedCard.expire_month,
       card_expire_year: selectedCard.expire_year,
-      card_ccv: 321, // TODO
+      card_ccv: 325, // TODO
       price: calculateGrandTotalPrice(),
       products: cartItems.map((item) => ({
         product_id: item.product.id,

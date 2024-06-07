@@ -20,3 +20,8 @@ export const userAddAddress = (address) => {
 export const userGetAddress = (addressData) => {
   return { type: "USER_GET_ADDRESS", payload: { addressData } };
 };
+
+export const setSelectedAddress = (addressId) => ({
+  type: "SET_SELECTED_ADDRESS",
+  payload: addressId,
+});
