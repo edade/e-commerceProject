@@ -2,6 +2,7 @@ const ShoppingCardInitial = {
   cart: [],
   address: [],
   cards: [],
+  previousOrders: [],
 };
 
 export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
@@ -118,6 +119,23 @@ export const ShoppingCardReducer = (state = ShoppingCardInitial, action) => {
         cart: [],
       };
 
+    case "SET_PREVIOUS_ORDERS":
+      return {
+        ...state,
+        previousOrders: action.payload.map((order) => ({
+          ...order,
+          showDetails: false,
+        })),
+      };
+    case "TOGGLE_ORDER_DETAILS":
+      return {
+        ...state,
+        previousOrders: state.previousOrders.map((order) =>
+          order.id === action.payload
+            ? { ...order, showDetails: !order.showDetails }
+            : order
+        ),
+      };
     default:
       return state;
   }

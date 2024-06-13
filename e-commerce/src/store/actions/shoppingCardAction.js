@@ -101,3 +101,13 @@ export const resetCart = () => {
     type: "RESET_CART",
   };
 };
+
+export const setPreviousOrders = (orders) => ({
+  type: "SET_PREVIOUS_ORDERS",
+  payload: orders,
+});
+
+export const toggleOrderDetails = (orderId) => ({
+  type: "TOGGLE_ORDER_DETAILS",
+  payload: orderId,
+});
