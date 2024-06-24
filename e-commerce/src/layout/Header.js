@@ -25,6 +25,7 @@ const Header = () => {
   const [isShoppingCardDropdownVisible, setShoppingCardDropdownVisible] =
     useState(false);
   const [selectedGender, setSelectedGender] = useState(null);
+  const [isUserDropdownVisible, setIsUserDropdownVisible] = useState(false);
 
   const handleDropdownVisibility = (visible) => {
     setDropdownVisible(visible);
@@ -53,6 +54,13 @@ const Header = () => {
   const menCategories = categories.filter((category) =>
     category.code.startsWith("e:")
   );
+  const toggleUserDropdown = () => {
+    setIsUserDropdownVisible(!isUserDropdownVisible);
+  };
+
+  const handlePreviousOrdersClick = () => {
+    history.push("/previous-orders");
+  };
 
   return (
     <header>
@@ -177,15 +185,33 @@ const Header = () => {
               <div className="flex items-center w-auto justify-around px-4 font-semibold lg:pb-0 sm:pb-4 text-[#23A6F0]">
                 <p>Welcome {user.name} </p>
                 {user.gravatar && (
-                  <img
-                    className="h-[2em] rounded-full ml-2"
-                    src={user.gravatar}
-                    alt={`${user.name}'s Gravatar`}
-                  />
+                  <div className="relative">
+                    <img
+                      className="h-[2em] rounded-full ml-2 cursor-pointer"
+                      src={user.gravatar}
+                      alt={`${user.name}'s Gravatar`}
+                      onClick={toggleUserDropdown}
+                    />
+                    {isUserDropdownVisible && (
+                      <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 shadow-md rounded-md z-50">
+                        <ul className="py-1">
+                          <li
+                            className="cursor-pointer py-2 px-4 hover:bg-gray-100 text-[#737373]"
+                            onClick={handlePreviousOrdersClick}
+                          >
+                            Orders
+                          </li>
+                          <li
+                            className="cursor-pointer py-2 px-4 hover:bg-gray-100 text-[#737373]"
+                            onClick={handleLogout}
+                          >
+                            Logout
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 )}
-                <button onClick={handleLogout} className="px-2">
-                  Logout
-                </button>
               </div>
             ) : (
               <div className="flex items-center w-[12.5rem] justify-around px-4 font-semibold lg:pb-0 sm:pb-4 text-[#23A6F0]">

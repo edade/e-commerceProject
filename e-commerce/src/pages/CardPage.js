@@ -18,7 +18,7 @@ const CardPage = () => {
   const cartItems = useSelector((state) => state.shoppingCard.cart);
   const cards = useSelector((state) => state.shoppingCard.cards);
   const selectedAddressId = useSelector(
-    (state) => state.shoppingCard.selectedAddressId
+    (state) => state.user.selectedAddressId
   );
   const dispatch = useDispatch();
   const history = useHistory();
