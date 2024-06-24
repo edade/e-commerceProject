@@ -21,6 +21,7 @@ import { fetchProducts } from "./store/thunk/fetchProducts";
 import ShopCardPage from "./pages/ShopCardPage";
 import OrderPage from "./pages/OrderPage";
 import CardPage from "./pages/CardPage";
+import PreviousOrdersPage from "./pages/PreviousOrdersPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -105,6 +106,9 @@ function App() {
         </Route>
         <Route exact path="/card">
           <CardPage />
+        </Route>
+        <Route exact path="/previous-orders">
+          <PreviousOrdersPage />
         </Route>
       </Switch>
       <ToastContainer />

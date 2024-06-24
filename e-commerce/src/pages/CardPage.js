@@ -138,6 +138,7 @@ const CardPage = () => {
     dispatch(
       CreateOrder(orderData, () => {
         toast("Siparişiniz başarıyla oluşturuldu!");
+        history.push("/previous-orders");
       })
     );
   };
