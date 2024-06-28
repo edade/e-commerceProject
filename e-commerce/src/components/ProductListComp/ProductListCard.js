@@ -38,9 +38,11 @@ const ProductListCard = ({ viewType }) => {
   return (
     <div className="font-['montserrat'] ">
       <div
-        className={`flex flex-wrap justify-center gap-16 my-8 font-['montserrat'] ${
-          viewType === "grid" ? "flex-row" : "flex-col"
-        }`}
+        className={`grid ${
+          viewType === "grid"
+            ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            : "flex flex-col gap-4"
+        } my-8`}
       >
         {products.map((item, index) => (
           <Link
@@ -51,23 +53,25 @@ const ProductListCard = ({ viewType }) => {
             key={index}
           >
             <div
-              className={`flex ${
+              className={`flex flex-col justify-between bg-white border border-gray-200 rounded-lg shadow-md p-4 ${
                 viewType === "grid"
-                  ? "flex-col text-center lg:w-[15rem] sm:w-full lg:mx-0 sm:mx-8 mb-8 shadow-lg hover:shadow-slate-800 gap-3"
-                  : "flex-row space-between gap-4"
-              } `}
+                  ? "text-center h-full"
+                  : "flex-row space-between"
+              }`}
             >
               <img
-                className="lg:w-full lg:h-full sm:w-full sm:h-full "
+                className="object-cover h-64 w-full mb-4"
                 src={item?.images?.[0]?.url}
                 alt=""
               />
-              <h5 className="text-[#252B42]  font-bold">{item.name}</h5>
-              <div
-                className="text-[#737373] text-sm font-bold py-2 px-2"
-                href="#"
-              >
-                {item.description}
+              <div className="flex-grow">
+                <h5 className="text-[#252B42]  font-bold">{item.name}</h5>
+                <div
+                  className="text-[#737373] text-sm font-bold py-2 px-2"
+                  href="#"
+                >
+                  {item.description}
+                </div>
               </div>
               <h5 className="text-[#23856D] font-bold">${item.price} </h5>
               <div className="flex text-center justify-center py-2">
@@ -82,7 +86,7 @@ const ProductListCard = ({ viewType }) => {
                   handleAddtoCard(item);
                   toast("Product added to basket!");
                 }}
-                className="text-white bg-[#23A6F0] py-3 px-4 rounded"
+                className="text-white bg-[#23A6F0] my-3 py-3 px-4 rounded"
               >
                 Add to Basket
               </button>
@@ -90,7 +94,7 @@ const ProductListCard = ({ viewType }) => {
           </Link>
         ))}
       </div>
-      <div className="text-xs sm:my-12">
+      <div className="text-xs sm:my-12 flex justify-center">
         <button className="border rounded-l-lg h-14 w-20 text-[#737373] bg-[#BDBDBD] ">
           First
         </button>
